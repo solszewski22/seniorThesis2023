@@ -1,4 +1,4 @@
-# Use Cases
+# Recipe Use Cases
 
 ## 1. Login
 **Summary:** User logs into the application.
