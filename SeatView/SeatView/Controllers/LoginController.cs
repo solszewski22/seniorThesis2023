@@ -16,6 +16,8 @@ namespace SeatView.Controllers
             return View("LoginView");
         }
 
+        // a method that returns an action (more specifically a view or page) after database verifies that 
+        // the username and password are present
         public ActionResult Login(OwnerModel ownerModel)
         {
             SecurityService securityService = new SecurityService();

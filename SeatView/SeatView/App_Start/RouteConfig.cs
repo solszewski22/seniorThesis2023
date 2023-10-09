@@ -19,6 +19,7 @@ namespace SeatView
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
+            // a route that connections the controller, called 'Login' when the '.../login' route is searched
             routes.MapRoute(
                 name: "Login",
                 url: "{Login}/{action}",
