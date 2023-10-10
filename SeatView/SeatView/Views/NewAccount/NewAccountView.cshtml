@@ -1,0 +1,43 @@
+﻿@model SeatView.Models.OwnerModel
+@{
+    ViewBag.Title = "NewAccountView";
+}
+
+<h2>Create Account</h2>
+
+@*@using (Html.BeginForm([Action/Method in Controller], [Name of Controller/Route to perform], [HTTP Method]))*@
+@using (Html.BeginForm("AccountCreation", "NewAccount", FormMethod.Post))
+{
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Last Name</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Company Name</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+}
+

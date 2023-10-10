@@ -25,6 +25,13 @@ namespace SeatView
                 url: "{Login}/{action}",
                 defaults: new { controller = "Login", action = "Index"}
             );
+
+            // a route that connects the controller called 'NewAccount' when the '.../newaccount' route is searched
+            routes.MapRoute(
+                name: "NewAccount",
+                url: "{NewAccount}/{action}",
+                defaults: new { controller = "NewAccount", action = "Index" }
+            );
         }
     }
 }
