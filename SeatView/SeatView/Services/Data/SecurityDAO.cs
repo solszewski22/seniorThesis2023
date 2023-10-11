@@ -40,7 +40,14 @@ namespace SeatView.Services.Data
                     // if rows are returned, return true
                     if (reader.HasRows)
                     {
-                        retVal = true;
+                        if (reader.Read())
+                        {
+                            // set the other attributes of the owner model from the data received from the query
+                            owner.firstName = reader.GetString(1);
+                            owner.lastName = reader.GetString(2);
+                            owner.company = reader.GetString(3);
+                            retVal = true;
+                        }
                     }
                 }
                 catch(Exception e)
