@@ -43,6 +43,7 @@ namespace SeatView.Services.Data
                         if (reader.Read())
                         {
                             // set the other attributes of the owner model from the data received from the query
+                            owner.id = reader.GetInt32(0);
                             owner.firstName = reader.GetString(1);
                             owner.lastName = reader.GetString(2);
                             owner.company = reader.GetString(3);

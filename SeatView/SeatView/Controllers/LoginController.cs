@@ -18,13 +18,24 @@ namespace SeatView.Controllers
 
         // a method that returns an action (more specifically a view or page) after database verifies that 
         // the username and password are present
-        public ActionResult Login(OwnerModel ownerModel)
+        public ActionResult Login(VenueModel venueModel, OwnerModel ownerModel)
         {
-            SecurityService securityService = new SecurityService();
+            // authenticate whether the entered credentials are found in the database
+            ServicesImplement securityService = new ServicesImplement();
             bool loginSuccess = securityService.authenticate(ownerModel);
+
+            // if those credentials are correct...
             if (loginSuccess)
             {
-                return View("OwnerLoginView", ownerModel);
+                // create a venue service that will retrieve all the venues for a specific owner
+                ServicesImplement venueService = new ServicesImplement();
+
+                // create a model that consists of two models so that both can be passed to the view
+                OwnerVenueModel dualModel = new OwnerVenueModel();
+                dualModel.owner = ownerModel;
+                dualModel.venues = venueService.retrieveVenues(venueModel, ownerModel);
+
+                return View("OwnerLoginView", dualModel);
             }
             else
             {

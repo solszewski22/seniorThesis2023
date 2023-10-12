@@ -1,7 +1,64 @@
-﻿@model SeatView.Models.OwnerModel
+﻿@model SeatView.Models.OwnerVenueModel
 
 @{
     ViewBag.Title = "OwnerLoginView";
 }
+@*this displays the first name of the owner from the owner variable in the OwnerVenueModel*@
+<h2>Hello @Html.DisplayFor(model => Model.owner.firstName)</h2>
 
-<h2>Hello @Html.DisplayFor(model => model.firstName)</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label class="col-sm-2 col-form-label">Name</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">Address</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">Street</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">City</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">State</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">Zip Code</label>
+        </th>
+        <th></th>
+    </tr>
+    @*this loops through the venue list in the OwnerVenueModel*@
+    @foreach (var item in Model.venues)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zipCode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

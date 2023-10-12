@@ -127,11 +127,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\OwnerModel.cs" />
+    <Compile Include="Models\OwnerVenueModel.cs" />
+    <Compile Include="Models\VenueModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Business\InsertService.cs" />
-    <Compile Include="Services\Business\SecurityService.cs" />
+    <Compile Include="Services\Business\ServicesImplement.cs" />
     <Compile Include="Services\Data\InsertDAO.cs" />
     <Compile Include="Services\Data\SecurityDAO.cs" />
+    <Compile Include="Services\Data\VenueDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -171,9 +173,11 @@
     <Content Include="Views\Shared\OwnerLoginView.cshtml" />
     <Content Include="Views\Login\LoginFailedView.cshtml" />
     <Content Include="Views\NewAccount\NewAccountView.cshtml" />
+    <Content Include="Views\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Venue\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

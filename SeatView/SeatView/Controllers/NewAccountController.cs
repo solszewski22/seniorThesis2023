@@ -21,7 +21,7 @@ namespace SeatView.Controllers
         {
             // if the insert is successful, login in the user to the 'OwnerLoginView'
             // else show a login failure message/page
-            InsertService insertService = new InsertService();
+            ServicesImplement insertService = new ServicesImplement();
             if (insertService.insertOwner(ownerModel))
             {
                 return View("OwnerLoginView", ownerModel);
