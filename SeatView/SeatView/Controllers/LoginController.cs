@@ -63,5 +63,30 @@ namespace SeatView.Controllers
                 return RedirectToAction("LoginView");
             }
         }
+
+        // display the new venue form
+        public ActionResult newVenue()
+        {
+            return View("InsertVenueView");
+        }
+
+        // process the insert of a new venue
+        public ActionResult processVenueInsert(VenueModel newVenue)
+        {
+            // add to the database
+            ServicesImplement venue = new ServicesImplement();
+            int ownerID = (int)Session["id"];
+
+            // if the insert into the database comes back without an error...
+            if (venue.insertVenue(newVenue, ownerID))
+            {
+                // display the list of venues for the owner
+                return displayVenues();
+            }
+            else
+            {
+                return View("LoginFailed");
+            }
+        }
     }
 }

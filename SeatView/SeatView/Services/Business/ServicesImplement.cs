@@ -39,5 +39,13 @@ namespace SeatView.Services.Business
             VenueDAO daoVenue = new VenueDAO();
             return daoVenue.getVenueByID(venueID);
         }
+
+        // method to insert a new venue into the database
+        // call an instance of VenueDAO and call addVenue() -- return true/false if the insert was successful
+        public bool insertVenue(VenueModel venue, int ownerID)
+        {
+            VenueDAO daoVenue = new VenueDAO();
+            return daoVenue.addVenue(venue, ownerID);
+        }
     }
 }

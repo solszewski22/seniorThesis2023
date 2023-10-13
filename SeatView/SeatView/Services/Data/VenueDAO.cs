@@ -96,5 +96,42 @@ namespace SeatView.Services.Data
                 return returnVenue;
             }
         }
+    
+        // add a venue to the database
+        internal bool addVenue(VenueModel venue, int ownerID)
+        {
+            bool retVal = false;
+            string queryString = "INSERT INTO Venues (name, address, street, city, state, zip, layoutURL, ownerID) VALUES (@name, @address, @street, @city, @state, @zip, @layoutURL, @ownerID)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, 50).Value = venue.name;
+                command.Parameters.Add("@address", System.Data.SqlDbType.VarChar, 50).Value = venue.address;
+                command.Parameters.Add("@street", System.Data.SqlDbType.VarChar, 50).Value = venue.street;
+                command.Parameters.Add("@city", System.Data.SqlDbType.VarChar, 50).Value = venue.city;
+                command.Parameters.Add("@state", System.Data.SqlDbType.VarChar, 50).Value = venue.state;
+                command.Parameters.Add("@zip", System.Data.SqlDbType.VarChar, 50).Value = venue.zipCode;
+                command.Parameters.Add("@layoutURL", System.Data.SqlDbType.VarChar, 50).Value = venue.layoutURL;
+                command.Parameters.Add("@ownerID", System.Data.SqlDbType.Int).Value = ownerID;
+
+                try
+                {
+                    connection.Open();
+                    int rowsEffected = command.ExecuteNonQuery();
+
+                    if (rowsEffected > 0)
+                    {
+                        retVal = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return retVal;
+        }
     }
 }
