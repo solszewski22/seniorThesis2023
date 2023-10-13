@@ -32,6 +32,13 @@ namespace SeatView
                 url: "{NewAccount}/{action}",
                 defaults: new { controller = "NewAccount", action = "Index" }
             );
+
+            // a route that connect the Venue controller to a '.../venue' route 
+            routes.MapRoute(
+                name: "Venue",
+                url: "{Venue}/{action}/{id}",
+                defaults: new { controller = "Venue", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

@@ -4,13 +4,16 @@
     ViewBag.Title = "OwnerLoginView";
 }
 @*this displays the first name of the owner from the owner variable in the OwnerVenueModel*@
-<h2>Hello @Html.DisplayFor(model => Model.owner.firstName)</h2>
+<h2>Hello @Html.DisplayFor(model => model.ownerName)</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            <label class="col-sm-2 col-form-label">ID</label>
+        </th>
         <th>
             <label class="col-sm-2 col-form-label">Name</label>
         </th>
@@ -36,6 +39,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
@@ -55,7 +61,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Details", "Index", "Venue", new { id = item.id }, new { id = item.id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
             </td>
         </tr>

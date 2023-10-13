@@ -11,7 +11,7 @@ namespace SeatView.Services.Data
     {
         // connection string to connect to the database on the server (database location path)
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SeatViewDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        
+
         // method that returns true if the query insert is successful
         internal bool InsertOwner(OwnerModel ownerModel)
         {
@@ -54,6 +54,45 @@ namespace SeatView.Services.Data
                 }
             }
             return retVal;
+        }
+
+        public OwnerModel getOwnerByID(int id)
+        {
+            OwnerModel owner = new OwnerModel();
+            string queryString = "SELECT * FROM Owners WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // create an instance of a command to fill the empty parts of the queryString
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                // assign values based on what the user entered
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        // loop through each row and add the contents to a local venue variable that can be added to the return list of venues
+                        while (reader.Read())
+                        {
+                            owner.id = reader.GetInt32(0);
+                            owner.firstName = reader.GetString(1);
+                            owner.lastName = reader.GetString(2);
+                            owner.company = reader.GetString(3);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    // print out a message if an exception is thrown during the prcess of an insert statement
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return owner;
         }
     }
 }

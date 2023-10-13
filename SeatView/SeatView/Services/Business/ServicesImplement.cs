@@ -22,17 +22,22 @@ namespace SeatView.Services.Business
         public bool insertOwner(OwnerModel owner)
         {
             InsertDAO daoInsert = new InsertDAO();
-
             return daoInsert.InsertOwner(owner);
         }
 
         // method that calls the VenueDAO to query a list of venues
         // return the list that is queried from the database to be passed to the controller
-        public List<VenueModel> retrieveVenues(VenueModel venue, OwnerModel owner)
+        public List<VenueModel> retrieveVenues(int ownerID)
         {
             VenueDAO daoVenue = new VenueDAO();
+            return daoVenue.getAllVenues(ownerID);
+        }
 
-            return daoVenue.getAllVenues(venue, owner);
+        // method that call VenueDAO to query the database for one venue based on passed in id
+        public VenueModel retrieveOneVenue(int venueID)
+        {
+            VenueDAO daoVenue = new VenueDAO();
+            return daoVenue.getVenueByID(venueID);
         }
     }
 }

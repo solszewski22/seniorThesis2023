@@ -7,7 +7,7 @@ namespace SeatView.Models
 {
     public class OwnerVenueModel
     {
-        public OwnerModel owner { get; set; }
+        public string ownerName { get; set; }
         public List<VenueModel> venues { get; set; }
     }
 }
