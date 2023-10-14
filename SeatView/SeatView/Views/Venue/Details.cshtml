@@ -69,6 +69,6 @@
     </dl>
 </div>
 <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "displayVenues", "Login")
+    @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = Model.id }, new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "displayVenues", "Login")
 </p>

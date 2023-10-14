@@ -24,7 +24,12 @@ namespace SeatView.Controllers
             ServicesImplement insertService = new ServicesImplement();
             if (insertService.insertOwner(ownerModel))
             {
-                return View("OwnerLoginView", ownerModel);
+                // create a dualModel to pass to the View -- allows for the display of name and list of venues
+                List<VenueModel> venues = new List<VenueModel>();
+                OwnerVenueModel dualModel = new OwnerVenueModel();
+                dualModel.ownerName = ownerModel.firstName;
+                dualModel.venues = venues;
+                return View("OwnerLoginView", dualModel);
             }
             else
             {

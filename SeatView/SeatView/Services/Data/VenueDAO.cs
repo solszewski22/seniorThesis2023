@@ -98,10 +98,21 @@ namespace SeatView.Services.Data
         }
     
         // add a venue to the database
-        internal bool addVenue(VenueModel venue, int ownerID)
+        internal bool addOrUpdateVenue(VenueModel venue, int ownerID)
         {
             bool retVal = false;
-            string queryString = "INSERT INTO Venues (name, address, street, city, state, zip, layoutURL, ownerID) VALUES (@name, @address, @street, @city, @state, @zip, @layoutURL, @ownerID)";
+            string queryString = "";
+
+            if(venue.id <= 0)
+            {
+                // insert venue
+                queryString = "INSERT INTO Venues (name, address, street, city, state, zip, layoutURL, ownerID) VALUES (@name, @address, @street, @city, @state, @zip, @layoutURL, @ownerID)";
+            }
+            else
+            {
+                // update venue
+                queryString = "UPDATE Venues SET name = @name, address = @address, street = @street, city = @city, state = @state, zip = @zip, layoutURL = @layoutURL WHERE id = @id;";
+            }
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -114,7 +125,17 @@ namespace SeatView.Services.Data
                 command.Parameters.Add("@state", System.Data.SqlDbType.VarChar, 50).Value = venue.state;
                 command.Parameters.Add("@zip", System.Data.SqlDbType.VarChar, 50).Value = venue.zipCode;
                 command.Parameters.Add("@layoutURL", System.Data.SqlDbType.VarChar, 50).Value = venue.layoutURL;
-                command.Parameters.Add("@ownerID", System.Data.SqlDbType.Int).Value = ownerID;
+                
+                if(venue.id <= 0)
+                {
+                    // insert -- associate with an owner
+                    command.Parameters.Add("@ownerID", System.Data.SqlDbType.Int).Value = ownerID;
+                }
+                else
+                {
+                    // update -- associate with an exisiting id
+                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = venue.id;
+                }
 
                 try
                 {

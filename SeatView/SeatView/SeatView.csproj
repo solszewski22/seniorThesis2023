@@ -175,7 +175,7 @@
     <Content Include="Views\Login\LoginFailedView.cshtml" />
     <Content Include="Views\NewAccount\NewAccountView.cshtml" />
     <Content Include="Views\Venue\Details.cshtml" />
-    <Content Include="Views\Login\InsertVenueView.cshtml" />
+    <Content Include="Views\Login\VenueFormView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

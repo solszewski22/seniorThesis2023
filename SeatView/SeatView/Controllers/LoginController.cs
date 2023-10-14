@@ -65,20 +65,31 @@ namespace SeatView.Controllers
         }
 
         // display the new venue form
-        public ActionResult newVenue()
+        public ActionResult InsertVenue()
         {
-            return View("InsertVenueView");
+            // pass in an empty venue to avoid null system errors
+            VenueModel emptyVenue = new VenueModel();
+            return View("VenueFormView", emptyVenue);
+        }
+
+        // display venue form with editable fields for a specific venue by id
+        public ActionResult UpdateVenue(int id)
+        {
+            ServicesImplement venueService = new ServicesImplement();
+            VenueModel venue = venueService.retrieveOneVenue(id);
+
+            return View("VenueFormView", venue);
         }
 
         // process the insert of a new venue
-        public ActionResult processVenueInsert(VenueModel newVenue)
+        public ActionResult processVenueRequest(VenueModel newVenue)
         {
-            // add to the database
+            // create a service
             ServicesImplement venue = new ServicesImplement();
             int ownerID = (int)Session["id"];
 
-            // if the insert into the database comes back without an error...
-            if (venue.insertVenue(newVenue, ownerID))
+            // if the sqlQuery into the database comes back without an error...
+            if (venue.insertOrUpdateVenue(newVenue, ownerID))
             {
                 // display the list of venues for the owner
                 return displayVenues();

@@ -7,13 +7,10 @@
 <h2>Hello @Html.DisplayFor(model => model.ownerName)</h2>
 
 <p>
-    @Html.ActionLink("Create New", "newVenue")
+    @Html.ActionLink("Create New", "InsertVenue", "Login")
 </p>
 <table class="table">
     <tr>
-        <th>
-            <label class="col-sm-2 col-form-label">ID</label>
-        </th>
         <th>
             <label class="col-sm-2 col-form-label">Name</label>
         </th>
@@ -39,9 +36,6 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
@@ -60,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.zipCode)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = item.id }, new { id = item.id }) |
                 @Html.ActionLink("Details", "Index", "Venue", new { id = item.id }, new { id = item.id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
             </td>
