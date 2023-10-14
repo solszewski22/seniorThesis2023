@@ -99,5 +99,19 @@ namespace SeatView.Controllers
                 return View("LoginFailed");
             }
         }
+
+        public ActionResult DeleteVenue(int id)
+        { 
+            ServicesImplement venueService = new ServicesImplement();
+            if (venueService.deleteVenue(id))
+            {
+                // successful delete
+                return displayVenues();
+            }
+            else
+            {
+                return View("LoginFailed");
+            }
+        }
     }
 }

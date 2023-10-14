@@ -96,14 +96,14 @@ namespace SeatView.Services.Data
                 return returnVenue;
             }
         }
-    
+
         // add a venue to the database
         internal bool addOrUpdateVenue(VenueModel venue, int ownerID)
         {
             bool retVal = false;
             string queryString = "";
 
-            if(venue.id <= 0)
+            if (venue.id <= 0)
             {
                 // insert venue
                 queryString = "INSERT INTO Venues (name, address, street, city, state, zip, layoutURL, ownerID) VALUES (@name, @address, @street, @city, @state, @zip, @layoutURL, @ownerID)";
@@ -125,8 +125,8 @@ namespace SeatView.Services.Data
                 command.Parameters.Add("@state", System.Data.SqlDbType.VarChar, 50).Value = venue.state;
                 command.Parameters.Add("@zip", System.Data.SqlDbType.VarChar, 50).Value = venue.zipCode;
                 command.Parameters.Add("@layoutURL", System.Data.SqlDbType.VarChar, 50).Value = venue.layoutURL;
-                
-                if(venue.id <= 0)
+
+                if (venue.id <= 0)
                 {
                     // insert -- associate with an owner
                     command.Parameters.Add("@ownerID", System.Data.SqlDbType.Int).Value = ownerID;
@@ -153,6 +153,170 @@ namespace SeatView.Services.Data
                 }
             }
             return retVal;
+        }
+
+        internal bool deleteVenue(int id)
+        {
+            bool retVal = false;
+
+            // gather media IDs
+            List<int> mediaIDs;
+            mediaIDs = queryMediaIDs(id);
+
+            // gather the seat IDs and 
+            List<int> seatIDs;
+            seatIDs = querySeatIDs(id);
+
+            // delete the seats that are linked to this venue (id)
+            for (int i = 0; i < seatIDs.Count(); i++)
+            {
+                deleteBySeatID(seatIDs[i]);
+            }
+
+            // delete the media that is linked to the seats at this venue (id)
+            for (int i = 0; i < mediaIDs.Count(); i++)
+            {
+                deleteByMediaID(mediaIDs[i]);
+            }
+
+            // delete venue
+            string queryString = "DELETE FROM Venues WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = id;
+
+                try
+                {
+                    connection.Open();
+                    int rowsEffected = command.ExecuteNonQuery();
+
+                    if (rowsEffected > 0)
+                    {
+                        retVal = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return retVal;
+        }
+
+        private List<int> queryMediaIDs(int venueID)
+        {
+            List<int> returnIDs = new List<int>();
+            string queryString = "SELECT Media.id FROM Seats, Media WHERE Seats.mediaID = Media.id AND Seats.venueID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = venueID;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            int currID = 0;
+                            currID = reader.GetInt32(0);
+                            returnIDs.Add(currID);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return returnIDs;
+        }
+
+        private List<int> querySeatIDs (int venueID)
+        {
+            List<int> returnIDs = new List<int>();
+            string queryString = "SELECT Seats.id  FROM Seats WHERE Seats.venueID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = venueID;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            int currID = 0;
+                            currID = reader.GetInt32(0);
+                            returnIDs.Add(currID);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return returnIDs;
+        }
+
+        private void deleteByMediaID(int id)
+        {
+            string queryString = "DELETE FROM Media WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        private void deleteBySeatID(int id)
+        {
+            string queryString = "DELETE FROM Seats WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                { 
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
     }
 }
