@@ -1,0 +1,42 @@
+﻿@model SeatView.Models.VenueSeatModel
+@{
+    ViewBag.Title = "LayoutInfoView";
+}
+
+<h2>LayoutInfoView</h2>
+
+<h2>Layout is @Html.DisplayFor(model => model.venueLayout)</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <label class="col-sm-2 col-form-label">Section</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">Row</label>
+        </th>
+        <th>
+            <label class="col-sm-2 col-form-label">Seat Number</label>
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.seats)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.section)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.row)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.seatNum)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = item.id }, new { id = item.id }) |
+                @Html.ActionLink("Details", "Index", "Venue", new { id = item.id }, new { id = item.id }) |
+                @Html.ActionLink("Delete", "DeleteVenue", "Login", new { id = item.id }, new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>

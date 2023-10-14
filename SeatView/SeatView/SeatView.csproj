@@ -129,10 +129,13 @@
     </Compile>
     <Compile Include="Models\OwnerModel.cs" />
     <Compile Include="Models\OwnerVenueModel.cs" />
+    <Compile Include="Models\SeatModel.cs" />
     <Compile Include="Models\VenueModel.cs" />
+    <Compile Include="Models\VenueSeatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Business\ServicesImplement.cs" />
     <Compile Include="Services\Data\InsertDAO.cs" />
+    <Compile Include="Services\Data\SeatDAO.cs" />
     <Compile Include="Services\Data\SecurityDAO.cs" />
     <Compile Include="Services\Data\VenueDAO.cs" />
   </ItemGroup>
@@ -176,6 +179,7 @@
     <Content Include="Views\NewAccount\NewAccountView.cshtml" />
     <Content Include="Views\Venue\Details.cshtml" />
     <Content Include="Views\Login\VenueFormView.cshtml" />
+    <Content Include="Views\Venue\LayoutInfoView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

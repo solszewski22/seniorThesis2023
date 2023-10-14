@@ -48,10 +48,18 @@ namespace SeatView.Services.Business
             return daoVenue.addOrUpdateVenue(venue, ownerID);
         }
 
+        // method to delete a venue int the database
         public bool deleteVenue(int venueID)
         {
             VenueDAO daoVenue = new VenueDAO();
             return daoVenue.deleteVenue(venueID);
+        }
+
+        // method to retrieve all the seats in one venue by id
+        public List<SeatModel> getSeatsForVenue(int venueID)
+        {
+            SeatDAO daoSeat = new SeatDAO();
+            return daoSeat.getSeats(venueID);
         }
     }
 }

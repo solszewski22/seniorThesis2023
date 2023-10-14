@@ -14,15 +14,5 @@ namespace SeatView.Models
         public string company { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-
-        //public OwnerModel(string first, string last, string companyName, string userName, string pass)
-        //{
-        //    firstName = first;
-        //    lastName = last;
-        //    company = companyName;
-        //    username = userName;
-        //    password = pass;
-
-        //}
     }
 }

@@ -155,6 +155,7 @@ namespace SeatView.Services.Data
             return retVal;
         }
 
+        // delete a venue in the database
         internal bool deleteVenue(int id)
         {
             bool retVal = false;
@@ -206,6 +207,7 @@ namespace SeatView.Services.Data
             return retVal;
         }
 
+        // get a list of media ids to delete that are related to the seats in a venue to be deleted
         private List<int> queryMediaIDs(int venueID)
         {
             List<int> returnIDs = new List<int>();
@@ -240,6 +242,7 @@ namespace SeatView.Services.Data
             return returnIDs;
         }
 
+        // get a list of seat ids to delete that are related to a venue to be deleted
         private List<int> querySeatIDs (int venueID)
         {
             List<int> returnIDs = new List<int>();
@@ -274,6 +277,7 @@ namespace SeatView.Services.Data
             return returnIDs;
         }
 
+        // loop through media ids and call a sql query to delete
         private void deleteByMediaID(int id)
         {
             string queryString = "DELETE FROM Media WHERE id = @id";
@@ -297,6 +301,7 @@ namespace SeatView.Services.Data
             }
         }
 
+        // loop through seat ids and call a sql query to delete 
         private void deleteBySeatID(int id)
         {
             string queryString = "DELETE FROM Seats WHERE id = @id";
