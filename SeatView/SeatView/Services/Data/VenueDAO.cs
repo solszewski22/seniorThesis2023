@@ -278,8 +278,9 @@ namespace SeatView.Services.Data
         }
 
         // loop through media ids and call a sql query to delete
-        private void deleteByMediaID(int id)
+        public bool deleteByMediaID(int id)
         {
+            bool retVal = false;
             string queryString = "DELETE FROM Media WHERE id = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -291,19 +292,25 @@ namespace SeatView.Services.Data
                 try
                 {
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    int rowsEffected = command.ExecuteNonQuery();
+
+                    if (rowsEffected > 0)
+                    {
+                        retVal = true;
+                    }
                 }
                 catch (Exception e)
                 {
-                    string message = e.Message;
                     Console.WriteLine(e.Message);
                 }
             }
+            return retVal;
         }
 
         // loop through seat ids and call a sql query to delete 
-        private void deleteBySeatID(int id)
+        public bool deleteBySeatID(int id)
         {
+            bool retVal = false;
             string queryString = "DELETE FROM Seats WHERE id = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -315,13 +322,19 @@ namespace SeatView.Services.Data
                 try
                 {
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    int rowsEffected = command.ExecuteNonQuery();
+
+                    if (rowsEffected > 0)
+                    {
+                        retVal = true;
+                    }
                 }
                 catch (Exception e)
                 { 
                     Console.WriteLine(e.Message);
                 }
             }
+            return retVal;
         }
     }
 }

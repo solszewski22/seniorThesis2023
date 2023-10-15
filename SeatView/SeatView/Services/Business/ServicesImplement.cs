@@ -75,5 +75,12 @@ namespace SeatView.Services.Business
             MediaDAO daoMedia = new MediaDAO();
             return daoMedia.getMediaByID(mediaID);
         }
+
+        // method to delete one seat by given seatID
+        public bool deleteSeat(int seatID)
+        {
+            SeatDAO daoSeat = new SeatDAO();
+            return daoSeat.deleteSeat(seatID);
+        }
     }
 }

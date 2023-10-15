@@ -47,6 +47,20 @@ namespace SeatView.Controllers
             return View("LayoutInfoView", dualModel);
         }
 
+        public ActionResult DeleteSeat(int id)
+        {
+            ServicesImplement seatService = new ServicesImplement();
+            if (seatService.deleteSeat(id))
+            {
+                // if the delete was successful, display the remaining seats
+                return displayLayoutInfo();
+            }
+            else
+            {
+                return View("LoginFailed");
+            }
+        }
+
         //public ActionResult InsertSeat()
         //{
         //    return View("SeatFormView");

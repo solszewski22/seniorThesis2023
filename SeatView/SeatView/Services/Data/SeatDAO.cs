@@ -7,7 +7,8 @@ using System.Web;
 
 namespace SeatView.Services.Data
 {
-    public class SeatDAO
+    // SeatDAO inherits from VenueDAO to reuse the deleteMediaID and deleteSeatByID methods
+    public class SeatDAO : VenueDAO
     {
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SeatViewDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         // method to retrieve a list of all seats for one venue
@@ -90,6 +91,94 @@ namespace SeatView.Services.Data
                 }
                 return returnSeat;
             }
+        }
+    
+        // method to delete one seat by given id
+        internal bool deleteSeat(int seatID)
+        {
+            bool retVal = false;
+
+            // get media id that is attached to the seat
+            int mediaID = queryMediaId(seatID);
+
+            // delete the seat
+            if (deleteBySeatID(seatID))
+            {
+                // is the media id connected to more than one seat? (does it appear in the Seat table more than once)
+                if ((isMultiUseMedia(mediaID)) == 1)
+                {
+                    // delete the media 
+                    deleteByMediaID(mediaID);
+                }
+                retVal = true;
+            }
+            return retVal;
+        }
+
+        // method to get the media linked to a specific seat (id)
+        private int queryMediaId(int seatID)
+        {
+            int returnID = 0;
+            string queryString = "SELECT mediaID FROM Seats WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = seatID;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            returnID = reader.GetInt32(0);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return returnID;
+        }
+        
+        // count the number of rows that the mediaID appear in
+        private int isMultiUseMedia(int mediaID)
+        {
+            int idCount = 0;
+            string queryString = "SELECT COUNT(mediaID) FROM Seats WHERE mediaID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = mediaID;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            idCount = reader.GetInt32(0);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return idCount;
         }
     }
 }
