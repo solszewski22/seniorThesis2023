@@ -10,6 +10,7 @@ namespace SeatView.Services.Data
     public class SeatDAO
     {
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SeatViewDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        // method to retrieve a list of all seats for one venue
         internal List<SeatModel> getSeats(int venueID)
         {
             // create a list of venues to be returned from the method
@@ -51,6 +52,43 @@ namespace SeatView.Services.Data
                     Console.WriteLine(e.Message);
                 }
                 return returnListOfSeats;
+            }
+        }
+
+        // method to retrieve one seat by an id
+        internal SeatModel getSeatByID(int seatID)
+        {
+            string queryString = "SELECT * FROM Seats WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = seatID;
+
+                SeatModel returnSeat = new SeatModel();
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            returnSeat.id = reader.GetInt32(0);
+                            returnSeat.section = reader.GetString(3);
+                            returnSeat.row = reader.GetString(4);
+                            returnSeat.seatNum = reader.GetString(5);
+                            returnSeat.mediaID = reader.GetInt32(7);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return returnSeat;
             }
         }
     }

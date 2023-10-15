@@ -61,5 +61,19 @@ namespace SeatView.Services.Business
             SeatDAO daoSeat = new SeatDAO();
             return daoSeat.getSeats(venueID);
         }
+
+        // method to retrieve one seat by a seatID
+        public SeatModel retrieveOneSeat(int seatID)
+        {
+            SeatDAO daoSeat = new SeatDAO();
+            return daoSeat.getSeatByID(seatID);
+        }
+
+        // method to retrieve one media by a mediaID
+        public MediaModel retrieveOneMedia(int mediaID)
+        {
+            MediaDAO daoMedia = new MediaDAO();
+            return daoMedia.getMediaByID(mediaID);
+        }
     }
 }

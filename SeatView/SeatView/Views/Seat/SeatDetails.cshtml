@@ -1,0 +1,45 @@
+﻿@model SeatView.Models.SeatMediaModel
+
+@{
+    ViewBag.Title = "SeatDetails";
+}
+
+<h2>SeatDetails</h2>
+
+<div>
+    <h4>SeatModel</h4>
+    <hr />
+
+    <h2>Layout is @Html.DisplayFor(model => model.media.mediaUrl)</h2>
+
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seat.section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seat.section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seat.row)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seat.row)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seat.seatNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seat.seatNum)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.seat.id }) |
+    @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue")
+</p>

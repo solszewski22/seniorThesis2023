@@ -123,18 +123,22 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewAccountController.cs" />
+    <Compile Include="Controllers\SeatController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MediaModel.cs" />
     <Compile Include="Models\OwnerModel.cs" />
     <Compile Include="Models\OwnerVenueModel.cs" />
+    <Compile Include="Models\SeatMediaModel.cs" />
     <Compile Include="Models\SeatModel.cs" />
     <Compile Include="Models\VenueModel.cs" />
     <Compile Include="Models\VenueSeatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Business\ServicesImplement.cs" />
     <Compile Include="Services\Data\InsertDAO.cs" />
+    <Compile Include="Services\Data\MediaDAO.cs" />
     <Compile Include="Services\Data\SeatDAO.cs" />
     <Compile Include="Services\Data\SecurityDAO.cs" />
     <Compile Include="Services\Data\VenueDAO.cs" />
@@ -180,6 +184,8 @@
     <Content Include="Views\Venue\Details.cshtml" />
     <Content Include="Views\Login\VenueFormView.cshtml" />
     <Content Include="Views\Venue\LayoutInfoView.cshtml" />
+    <Content Include="Views\Venue\SeatFormView.cshtml" />
+    <Content Include="Views\Seat\SeatDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

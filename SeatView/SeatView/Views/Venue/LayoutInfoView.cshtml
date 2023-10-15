@@ -7,6 +7,10 @@
 
 <h2>Layout is @Html.DisplayFor(model => model.venueLayout)</h2>
 
+<p>
+    @Html.ActionLink("Create New", "InsertSeat", "Venue")
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -34,7 +38,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = item.id }, new { id = item.id }) |
-                @Html.ActionLink("Details", "Index", "Venue", new { id = item.id }, new { id = item.id }) |
+                @Html.ActionLink("Details", "Index", "Seat", new { id = item.id }, new { id = item.id }) |
                 @Html.ActionLink("Delete", "DeleteVenue", "Login", new { id = item.id }, new { id = item.id })
             </td>
         </tr>
