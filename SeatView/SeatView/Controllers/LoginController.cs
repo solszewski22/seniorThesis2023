@@ -2,6 +2,7 @@
 using SeatView.Services.Business;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -72,6 +73,33 @@ namespace SeatView.Controllers
             return View("VenueFormView", emptyVenue);
         }
 
+        // saves an image to the Images folder and calls helper method to insert data into the database
+        [HttpPost]
+        public ActionResult processVenueInsert(ImageModel imgModel, VenueModel venueModel)
+        {
+            // save image into images folder in SeatView project
+            // build the filename and path to store the image in the folder
+            string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
+            string extension = Path.GetExtension(imgModel.imageFileName.FileName);
+
+            // concatenate the filename
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            imgModel.mediaURL = "~/Images/" + filename;
+
+            // get the exact local path to the file in the Images folder
+            filename = Path.Combine(Server.MapPath("~/Images/" + filename));
+
+            // save the image to the project's Images folder
+            imgModel.imageFileName.SaveAs(filename);
+
+            // save the image path and new venue into database
+            // set layoutURL in incoming venueModel
+            venueModel.layoutURL = filename;
+            processVenueRequest(venueModel);
+
+            return displayVenues();
+        }
+
         // display venue form with editable fields for a specific venue by id
         public ActionResult UpdateVenue(int id)
         {
@@ -81,7 +109,7 @@ namespace SeatView.Controllers
             return View("VenueFormView", venue);
         }
 
-        // process the insert of a new venue
+        // process the insert/Update of a new venue
         public ActionResult processVenueRequest(VenueModel newVenue)
         {
             // create a service
@@ -101,8 +129,20 @@ namespace SeatView.Controllers
         }
 
         public ActionResult DeleteVenue(int id)
-        { 
+        {
             ServicesImplement venueService = new ServicesImplement();
+            // delete the file in the Images folder first
+            // get the layoutURL for the specific venue
+            VenueModel venue = venueService.retrieveOneVenue(id);
+            string filePath = venue.layoutURL;
+
+            // if the file exists in the images folder, delete it
+            FileInfo file = new FileInfo(filePath);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+
             if (venueService.deleteVenue(id))
             {
                 // successful delete
@@ -114,4 +154,7 @@ namespace SeatView.Controllers
             }
         }
     }
+
+    // delete image from Images folder when a venue is deleted
+    // diplay filename when editing a venue
 }

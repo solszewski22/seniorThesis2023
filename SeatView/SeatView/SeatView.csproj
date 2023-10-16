@@ -128,6 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\MediaModel.cs" />
     <Compile Include="Models\OwnerModel.cs" />
     <Compile Include="Models\OwnerVenueModel.cs" />
@@ -189,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

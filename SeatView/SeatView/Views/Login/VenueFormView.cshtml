@@ -7,7 +7,7 @@
 <h2>InsertVenueView</h2>
 
 
-@using (Html.BeginForm("processVenueRequest", "Login", FormMethod.Post))
+@using (Html.BeginForm("processVenueInsert", "Login", FormMethod.Post, new { enctype = "multipart/form-data" } ))
 {
     <div class="row mb-3">
         <label class="col-sm-2 col-form-label">Name</label>
@@ -46,9 +46,9 @@
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-2 col-form-label">Layout URL</label>
+        <label class="col-sm-2 col-form-label">Upload Image</label>
         <div class="col-sm-10">
-            @Html.EditorFor(model => model.layoutURL, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            <input type="file" name="imageFileName" requried="required" />
         </div>
     </div>
 
