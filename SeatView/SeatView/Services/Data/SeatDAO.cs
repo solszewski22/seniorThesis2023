@@ -180,5 +180,39 @@ namespace SeatView.Services.Data
             }
             return idCount;
         }
+
+        // updates a seat in the Seats table from a seatModel
+        internal bool updateSeat(SeatModel seatModel)
+        {
+            bool retVal = false;
+
+            string queryString = "UPDATE Seats SET section = @section, row = @row, seatNum = @seatNum WHERE id = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@section", System.Data.SqlDbType.VarChar, 50).Value = seatModel.section;
+                command.Parameters.Add("@row", System.Data.SqlDbType.VarChar, 50).Value = seatModel.row;
+                command.Parameters.Add("@seatNum", System.Data.SqlDbType.VarChar, 50).Value = seatModel.seatNum;
+                command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = seatModel.id;
+
+                try
+                {
+                    connection.Open();
+                    int rowsEffected = command.ExecuteNonQuery();
+
+                    if (rowsEffected > 0)
+                    {
+                        retVal = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return retVal;
+        }
     }
 }

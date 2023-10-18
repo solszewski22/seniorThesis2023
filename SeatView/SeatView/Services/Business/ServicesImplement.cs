@@ -70,7 +70,7 @@ namespace SeatView.Services.Business
         }
 
         // method to retrieve one media by a mediaID
-        public MediaModel retrieveOneMedia(int mediaID)
+        public ImageModel retrieveOneMedia(int mediaID)
         {
             MediaDAO daoMedia = new MediaDAO();
             return daoMedia.getMediaByID(mediaID);
@@ -81,6 +81,20 @@ namespace SeatView.Services.Business
         {
             SeatDAO daoSeat = new SeatDAO();
             return daoSeat.deleteSeat(seatID);
+        }
+
+        // method updates a media entity
+        public bool updateMedia(ImageModel imgModel)
+        {
+            MediaDAO daoMedia = new MediaDAO();
+            return daoMedia.updateMedia(imgModel); 
+        }
+    
+        // method updates a seat entity
+        public bool updateSeat(SeatModel seatModel)
+        {
+            SeatDAO daoSeat = new SeatDAO();
+            return daoSeat.updateSeat(seatModel);
         }
     }
 }

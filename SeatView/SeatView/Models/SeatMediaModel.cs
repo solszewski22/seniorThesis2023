@@ -7,7 +7,7 @@ namespace SeatView.Models
 {
     public class SeatMediaModel
     {
-        public MediaModel media { get; set; }
+        public ImageModel media { get; set; }
         public SeatModel seat { get; set; }
     }
 }

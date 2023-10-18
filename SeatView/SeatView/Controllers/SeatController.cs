@@ -17,7 +17,7 @@ namespace SeatView.Controllers
             SeatModel seat = seatService.retrieveOneSeat(id);
 
             // get matching media for the seat
-            MediaModel seatMedia = seatService.retrieveOneMedia(seat.mediaID);
+            ImageModel seatMedia = seatService.retrieveOneMedia(seat.mediaID);
 
             // create dualModel for the View
             SeatMediaModel dualModel = new SeatMediaModel();

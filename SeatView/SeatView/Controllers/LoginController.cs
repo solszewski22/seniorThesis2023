@@ -84,21 +84,21 @@ namespace SeatView.Controllers
 
             // concatenate the filename
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            imgModel.mediaURL = "~/Images/" + filename;
+            imgModel.mediaURL = "~/Images/Layouts" + filename;
 
             // set layoutURL in incoming venueModel
             venueModel.layoutURL = imgModel.mediaURL;
 
             // get the exact local path to the file in the Images folder
-            filename = Path.Combine(Server.MapPath("~/Images/" + filename));
+            filename = Path.Combine(Server.MapPath("~/Images/Layout" + filename));
 
             // save the image to the project's Images folder
             imgModel.imageFileName.SaveAs(filename);
 
             // save the image path and new venue into database
-            processVenueRequest(venueModel);
+            return processVenueRequest(venueModel);
 
-            return displayVenues();
+            //return displayVenues();
         }
 
         // display venue form with editable fields for a specific venue by id
@@ -157,6 +157,4 @@ namespace SeatView.Controllers
             }
         }
     }
-
-    // display filename when editing a venue
 }

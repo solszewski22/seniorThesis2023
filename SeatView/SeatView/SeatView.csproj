@@ -129,7 +129,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ImageModel.cs" />
-    <Compile Include="Models\MediaModel.cs" />
     <Compile Include="Models\OwnerModel.cs" />
     <Compile Include="Models\OwnerVenueModel.cs" />
     <Compile Include="Models\SeatMediaModel.cs" />

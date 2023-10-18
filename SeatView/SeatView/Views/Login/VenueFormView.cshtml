@@ -59,8 +59,11 @@
 
 <div>
     @Html.ActionLink("Back to List", "displayVenues", "Login")
-    @*edit layout on create a new form?*@
-    @Html.ActionLink("Edit Layout", "editLayout", "Venue", new { id = Model.id, url = Model.layoutURL }, new { id = Model.id, url = Model.layoutURL })
+    @if (Model.id > 0)
+    {
+        @Html.ActionLink("Edit Layout", "editLayout", "Venue", new { id = Model.id, url = Model.layoutURL }, new { id = Model.id, url = Model.layoutURL })
+    }
+
 </div>
 
 @section Scripts {
