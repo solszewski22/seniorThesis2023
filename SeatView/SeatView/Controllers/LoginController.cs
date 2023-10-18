@@ -86,6 +86,9 @@ namespace SeatView.Controllers
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
             imgModel.mediaURL = "~/Images/" + filename;
 
+            // set layoutURL in incoming venueModel
+            venueModel.layoutURL = imgModel.mediaURL;
+
             // get the exact local path to the file in the Images folder
             filename = Path.Combine(Server.MapPath("~/Images/" + filename));
 
@@ -93,8 +96,6 @@ namespace SeatView.Controllers
             imgModel.imageFileName.SaveAs(filename);
 
             // save the image path and new venue into database
-            // set layoutURL in incoming venueModel
-            venueModel.layoutURL = filename;
             processVenueRequest(venueModel);
 
             return displayVenues();
@@ -134,7 +135,9 @@ namespace SeatView.Controllers
             // delete the file in the Images folder first
             // get the layoutURL for the specific venue
             VenueModel venue = venueService.retrieveOneVenue(id);
-            string filePath = venue.layoutURL;
+
+            // get the full path to the image to delete
+            string filePath = Path.Combine(Server.MapPath(venue.layoutURL));
 
             // if the file exists in the images folder, delete it
             FileInfo file = new FileInfo(filePath);
@@ -155,6 +158,5 @@ namespace SeatView.Controllers
         }
     }
 
-    // delete image from Images folder when a venue is deleted
-    // diplay filename when editing a venue
+    // display filename when editing a venue
 }
