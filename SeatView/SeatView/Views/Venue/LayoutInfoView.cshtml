@@ -5,7 +5,7 @@
 
 <h2>LayoutInfoView</h2>
 
-<h2>Layout is @Html.DisplayFor(model => model.venueLayout)</h2>
+<img src="@Url.Content(Model.venueLayout)" width="250" height="250" alt="layoutImg" />
 
 <p>
     @Html.ActionLink("Create New", "InsertSeat", "Venue")
@@ -24,6 +24,7 @@
         </th>
         <th></th>
     </tr>
+
     @foreach (var item in Model.seats)
     {
         <tr>

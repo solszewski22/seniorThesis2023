@@ -10,7 +10,7 @@
     <h4>SeatModel</h4>
     <hr />
 
-    <h2>Layout is @Html.DisplayFor(model => model.media.mediaUrl)</h2>
+    <img src="@Url.Content(Model.media.mediaURL)" width="250" height="250" alt="seatImg" />
 
     <dl class="dl-horizontal">
 
@@ -40,6 +40,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.seat.id }) |
+    @Html.ActionLink("Edit", "UpdateSeat", "Venue", new { id = Model.seat.id }, new { id = Model.seat.id }) |
     @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue")
 </p>
