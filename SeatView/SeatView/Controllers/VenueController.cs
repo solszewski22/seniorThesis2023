@@ -60,14 +60,15 @@ namespace SeatView.Controllers
         // processes the seat update by saving the image the updating the seat and media tables
         public ActionResult processSeatUpdate(ImageModel imgModel, SeatModel seatModel)
         {
-            string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
-            string extension = Path.GetExtension(imgModel.imageFileName.FileName);
+            //string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
+            //string extension = Path.GetExtension(imgModel.imageFileName.FileName);
 
-            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            imgModel.mediaURL = "~/Images/Seats/" + filename;
+            //filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            //imgModel.mediaURL = "~/Images/Seats/" + filename;
 
-            filename = Path.Combine(Server.MapPath("~/Images/Seats/" + filename));
-            imgModel.imageFileName.SaveAs(filename);
+            //filename = Path.Combine(Server.MapPath("~/Images/Seats/" + filename));
+            //imgModel.imageFileName.SaveAs(filename);
+            saveMedia(imgModel);
 
             // update seat and media tables in database
             ServicesImplement seatService = new ServicesImplement();
@@ -102,6 +103,55 @@ namespace SeatView.Controllers
             {
                 return View("LoginFailed");
             }
+        }
+
+        public ActionResult InsertSeat()
+        {
+            SeatModel seat = new SeatModel();
+            seat.venueUrl = Session["layoutURL"].ToString();
+
+            return View("AddSeatView", seat);
+        }
+
+        // add a new seat and it's media to the database
+        public ActionResult processSeatInsert(SeatModel seat, ImageModel img)
+        {
+            // save the image to the seat view folder of images
+            saveMedia(img);
+
+            // insert the media into the database
+            ServicesImplement mediaSeatService = new ServicesImplement();
+            int newMediaID = mediaSeatService.insertMedia(img);
+
+            // note the newly added id of the image in the database to be set for the seat entity
+            seat.mediaID = newMediaID;
+            seat.venueID = (int)Session["venueID"];
+            seat.venueUrl = (string)Session["layoutURL"];
+
+            // insert the seat into the database
+            if (mediaSeatService.insertSeat(seat))
+            {
+                // successful addition to the database
+                return displayLayoutInfo();
+            }
+            else
+            {
+                return View("LoginFailed");
+            }
+
+        }
+
+        // seperate function to save a media image to the 'Images' folder
+        public void saveMedia(ImageModel imgModel)
+        {
+            string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
+            string extension = Path.GetExtension(imgModel.imageFileName.FileName);
+
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            imgModel.mediaURL = "~/Images/Seats/" + filename;
+
+            filename = Path.Combine(Server.MapPath("~/Images/Seats/" + filename));
+            imgModel.imageFileName.SaveAs(filename);
         }
 
     }

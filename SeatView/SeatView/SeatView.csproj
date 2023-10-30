@@ -186,6 +186,7 @@
     <Content Include="Views\Venue\LayoutInfoView.cshtml" />
     <Content Include="Views\Venue\SeatFormView.cshtml" />
     <Content Include="Views\Seat\SeatDetails.cshtml" />
+    <Content Include="Views\Venue\AddSeatView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

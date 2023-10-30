@@ -44,7 +44,7 @@ namespace SeatView.Services.Data
                 return returnMedia;
             }
         }
-        
+
         // update the media table with new information
         internal bool updateMedia(ImageModel imgModel)
         {
@@ -75,6 +75,39 @@ namespace SeatView.Services.Data
                 }
             }
             return retVal;
+        }
+
+        // insert an image into the database Media table and returned the new row's id
+        internal int insertMedia(ImageModel imgModel)
+        {
+            Int32 retValID = 0;
+
+            string queryString = "INSERT INTO MEDIA (imgUrl) VALUES (@url);" + "SELECT CAST(scope_identity() AS int);";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@url", System.Data.SqlDbType.VarChar, 50).Value = imgModel.mediaURL;
+
+                try
+                {
+                    connection.Open();
+                    // get the row id of the insert returned from the query
+                    Int32 latestRowId = (Int32)command.ExecuteScalar();
+
+                    // is the row id is a valid id, return it from the function
+                    if (latestRowId > 0)
+                    {
+                        retValID = latestRowId;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return retValID;
         }
     }
 }

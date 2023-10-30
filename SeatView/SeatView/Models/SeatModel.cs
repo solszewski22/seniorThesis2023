@@ -15,5 +15,7 @@ namespace SeatView.Models
         public string seatNum { get; set; }
         public int venueID { get; set; }
         public int mediaID { get; set; }
+
+        public string venueUrl { get; set; }
     }
 }

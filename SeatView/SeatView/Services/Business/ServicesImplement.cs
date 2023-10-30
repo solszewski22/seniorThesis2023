@@ -96,5 +96,19 @@ namespace SeatView.Services.Business
             SeatDAO daoSeat = new SeatDAO();
             return daoSeat.updateSeat(seatModel);
         }
+        
+        // method to insert a image entity
+        public int insertMedia(ImageModel imgModel)
+        {
+            MediaDAO daoMedia = new MediaDAO();
+            return daoMedia.insertMedia(imgModel);
+        }
+    
+        // method to insert a seat entity
+        public bool insertSeat(SeatModel seatModel)
+        {
+            SeatDAO daoSeat = new SeatDAO();
+            return daoSeat.insertSeat(seatModel);
+        }
     }
 }

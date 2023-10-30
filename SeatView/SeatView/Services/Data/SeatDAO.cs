@@ -17,7 +17,7 @@ namespace SeatView.Services.Data
             // create a list of venues to be returned from the method
             List<SeatModel> returnListOfSeats = new List<SeatModel>();
 
-            string queryString = "SELECT * FROM Seats WHERE venueID = @venueID";
+            string queryString = "SELECT * FROM Seats WHERE venueID = @venueID ORDER BY section, row, seatNum";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -92,7 +92,7 @@ namespace SeatView.Services.Data
                 return returnSeat;
             }
         }
-    
+
         // method to delete one seat by given id
         internal bool deleteSeat(int seatID)
         {
@@ -147,7 +147,7 @@ namespace SeatView.Services.Data
             }
             return returnID;
         }
-        
+
         // count the number of rows that the mediaID appear in
         private int isMultiUseMedia(int mediaID)
         {
@@ -196,6 +196,43 @@ namespace SeatView.Services.Data
                 command.Parameters.Add("@row", System.Data.SqlDbType.VarChar, 50).Value = seatModel.row;
                 command.Parameters.Add("@seatNum", System.Data.SqlDbType.VarChar, 50).Value = seatModel.seatNum;
                 command.Parameters.Add("@id", System.Data.SqlDbType.VarChar, 50).Value = seatModel.id;
+
+                try
+                {
+                    connection.Open();
+                    int rowsEffected = command.ExecuteNonQuery();
+
+                    if (rowsEffected > 0)
+                    {
+                        retVal = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return retVal;
+        }
+
+        // inserts a new seat given the SeatModel passed in
+        internal bool insertSeat(SeatModel seatModel)
+        {
+            bool retVal = false;
+
+            string queryString = "INSERT INTO Seats (xCoord, yCoord, section, row, seatNum, venueID, mediaID) VALUES (@x, @y, @section, @row, @seatNum, @venueId, @mediaId)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@x", System.Data.SqlDbType.VarChar, 50).Value = seatModel.x_coord;
+                command.Parameters.Add("@y", System.Data.SqlDbType.VarChar, 50).Value = seatModel.y_coord;
+                command.Parameters.Add("@section", System.Data.SqlDbType.VarChar, 50).Value = seatModel.section;
+                command.Parameters.Add("@row", System.Data.SqlDbType.VarChar, 50).Value = seatModel.row;
+                command.Parameters.Add("@seatNum", System.Data.SqlDbType.VarChar, 50).Value = seatModel.seatNum;
+                command.Parameters.Add("@venueId", System.Data.SqlDbType.VarChar, 50).Value = seatModel.venueID;
+                command.Parameters.Add("@mediaId", System.Data.SqlDbType.VarChar, 50).Value = seatModel.mediaID;
 
                 try
                 {
