@@ -100,12 +100,17 @@ namespace SeatView.Services.Data
 
             // get media id that is attached to the seat
             int mediaID = queryMediaId(seatID);
+            bool deleteMedia = false;
+            if(isMultiUseMedia(mediaID) == 1)
+            {
+                deleteMedia = true;
+            }
 
             // delete the seat
             if (deleteBySeatID(seatID))
             {
                 // is the media id connected to more than one seat? (does it appear in the Seat table more than once)
-                if ((isMultiUseMedia(mediaID)) == 1)
+                if (deleteMedia)
                 {
                     // delete the media 
                     deleteByMediaID(mediaID);
@@ -152,7 +157,7 @@ namespace SeatView.Services.Data
         private int isMultiUseMedia(int mediaID)
         {
             int idCount = 0;
-            string queryString = "SELECT COUNT(mediaID) FROM Seats WHERE mediaID = @id";
+            string queryString = "SELECT COUNT(mediaID) AS mediaCount FROM Seats WHERE mediaID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

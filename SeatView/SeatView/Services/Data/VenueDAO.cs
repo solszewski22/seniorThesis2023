@@ -174,6 +174,8 @@ namespace SeatView.Services.Data
                 deleteBySeatID(seatIDs[i]);
             }
 
+            // not deleting the media in the database
+
             // delete the media that is linked to the seats at this venue (id)
             for (int i = 0; i < mediaIDs.Count(); i++)
             {

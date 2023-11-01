@@ -60,30 +60,32 @@ namespace SeatView.Controllers
         // processes the seat update by saving the image the updating the seat and media tables
         public ActionResult processSeatUpdate(ImageModel imgModel, SeatModel seatModel)
         {
-            //string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
-            //string extension = Path.GetExtension(imgModel.imageFileName.FileName);
-
-            //filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            //imgModel.mediaURL = "~/Images/Seats/" + filename;
-
-            //filename = Path.Combine(Server.MapPath("~/Images/Seats/" + filename));
-            //imgModel.imageFileName.SaveAs(filename);
-            saveMedia(imgModel);
-
-            // update seat and media tables in database
             ServicesImplement seatService = new ServicesImplement();
-            imgModel.id = seatModel.mediaID;
-            if (seatService.updateMedia(imgModel))
+            SeatModel seat = seatService.retrieveOneSeat(seatModel.id);
+            ImageModel img = seatService.retrieveOneMedia(seat.mediaID);
+            string filePath = Path.Combine(Server.MapPath(img.mediaURL));
+
+            // if the file exists in the images folder, delete it
+            FileInfo file = new FileInfo(filePath);
+            if (file.Exists)
             {
-                // successfully media update
-                if (seatService.updateSeat(seatModel))
-                {
-                    return displayLayoutInfo();
-                }
-                else
-                {
-                    return View("LoginFailed");
-                }
+                file.Delete();
+            }
+
+
+            if (imgModel.imageFileName != null)
+            {
+                saveMedia(imgModel);
+                // update seat and media tables in database
+                imgModel.id = seatModel.mediaID;
+                seatService.updateMedia(imgModel);
+
+            }
+
+            // update the seat
+            if (seatService.updateSeat(seatModel))
+            {
+                return displayLayoutInfo();
             }
             else
             {
@@ -94,6 +96,17 @@ namespace SeatView.Controllers
         public ActionResult DeleteSeat(int id)
         {
             ServicesImplement seatService = new ServicesImplement();
+            SeatModel seat = seatService.retrieveOneSeat(id);
+            ImageModel img = seatService.retrieveOneMedia(seat.mediaID);
+            string filePath = Path.Combine(Server.MapPath(img.mediaURL));
+
+            // if the file exists in the images folder, delete it
+            FileInfo file = new FileInfo(filePath);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+
             if (seatService.deleteSeat(id))
             {
                 // if the delete was successful, display the remaining seats

@@ -77,28 +77,41 @@ namespace SeatView.Controllers
         [HttpPost]
         public ActionResult processVenueInsert(ImageModel imgModel, VenueModel venueModel)
         {
+            ServicesImplement venueService = new ServicesImplement();
+            VenueModel venue = venueService.retrieveOneVenue(venueModel.id);
+            string filePath = Path.Combine(Server.MapPath(venue.layoutURL));
+
+            // if the file exists in the images folder, delete it
+            FileInfo file = new FileInfo(filePath);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+
             // save image into images folder in SeatView project
-            // build the filename and path to store the image in the folder
-            string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
-            string extension = Path.GetExtension(imgModel.imageFileName.FileName);
+            // build the filename and path to store the image in the folder if applicable
+            if (imgModel.imageFileName != null)
+            { 
+                // delete image to be replaced -- or replace
+                string filename = Path.GetFileNameWithoutExtension(imgModel.imageFileName.FileName);
+                string extension = Path.GetExtension(imgModel.imageFileName.FileName);
 
-            // concatenate the filename
-            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            imgModel.mediaURL = "~/Images/Layouts" + filename;
+                // concatenate the filename
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                imgModel.mediaURL = "~/Images/Layouts/" + filename;
 
-            // set layoutURL in incoming venueModel
-            venueModel.layoutURL = imgModel.mediaURL;
+                // set layoutURL in incoming venueModel
+                venueModel.layoutURL = imgModel.mediaURL;
 
-            // get the exact local path to the file in the Images folder
-            filename = Path.Combine(Server.MapPath("~/Images/Layout" + filename));
+                // get the exact local path to the file in the Images folder
+                filename = Path.Combine(Server.MapPath("~/Images/Layouts/" + filename));
 
-            // save the image to the project's Images folder
-            imgModel.imageFileName.SaveAs(filename);
+                // save the image to the project's Images folder
+                imgModel.imageFileName.SaveAs(filename);
+            }
 
             // save the image path and new venue into database
             return processVenueRequest(venueModel);
-
-            //return displayVenues();
         }
 
         // display venue form with editable fields for a specific venue by id
