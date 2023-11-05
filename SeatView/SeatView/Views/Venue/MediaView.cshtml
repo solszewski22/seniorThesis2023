@@ -1,0 +1,26 @@
+﻿@model List<SeatView.Models.SeatMediaModel>
+
+@{
+    ViewBag.Title = "MediaView";
+}
+
+<h2>MediaView</h2>
+
+<div>
+    <h4>SeatMediaModel</h4>
+    <hr />
+    @foreach (var item in Model)
+    {
+        <img src="@Url.Content(item.media.mediaURL)" width="250" height="250" alt="seatImg" />
+
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(modelItem => item.seat.section), @Html.DisplayFor(modelItem => item.seat.row), @Html.DisplayFor(modelItem => item.seat.seatNum)
+            </dd>
+        </dl>
+
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "chooseFromLayout", "Venue")
+</p>

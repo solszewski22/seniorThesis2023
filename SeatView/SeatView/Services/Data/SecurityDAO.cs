@@ -13,9 +13,9 @@ namespace SeatView.Services.Data
         // define a connection strin to the database -- where is it on the server to access it
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SeatViewDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        // is there a matching owner in the database for the input credentials?
         internal bool FindByOwner(OwnerModel owner)
         {
+            // is there a matching owner in the database for the input credentials?
             bool retVal = false;
 
             // string to house the SQL query to check if the credentials can be found

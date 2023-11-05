@@ -12,18 +12,23 @@ namespace SeatView.Controllers
     public class LoginController : Controller
     {
         // GET: Login
+        private ServicesImplement service;
+
+        public LoginController()
+        {
+            service = new ServicesImplement();
+        }
         public ActionResult Index()
         {
             return View("LoginView");
         }
 
-        // a method that returns an action (more specifically a view or page) after database verifies that 
-        // the username and password are present
         public ActionResult Login(OwnerModel ownerModel)
         {
+            // a method that returns an action (more specifically a view or page) after database verifies that 
+            // the username and password are present
             // authenticate whether the entered credentials are found in the database
-            ServicesImplement securityService = new ServicesImplement();
-            bool loginSuccess = securityService.authenticate(ownerModel);
+            bool loginSuccess = service.authenticate(ownerModel);
 
             // if those credentials are correct...
             if (loginSuccess)
@@ -37,24 +42,22 @@ namespace SeatView.Controllers
             }
             else
             {
-                return View("LoginFailedView");
+                return View("LoginView");
             }
         }
-
-        // helper method that can be referred to for login or main venues page
         public ActionResult displayVenues()
         {
+            // helper method that can be referred to for login or main venues page
             // if the user is logged in (meaning their id has been saved and authentication has taken place)
-            if(Session["id"] != null)
+            if (Session["id"] != null)
             {
                 int idNum = (int)Session["id"];
-                ServicesImplement venueService = new ServicesImplement();
                 List<VenueModel> venues = new List<VenueModel>();
 
                 // create a dual model to pass in name of owner and a list of their venues
                 OwnerVenueModel dualModel = new OwnerVenueModel();
                 dualModel.ownerName = Session["firstName"].ToString();
-                dualModel.venues = venueService.retrieveVenues(idNum);
+                dualModel.venues = service.retrieveVenues(idNum);
 
                 return View("OwnerLoginView", dualModel);
             }
@@ -64,21 +67,19 @@ namespace SeatView.Controllers
                 return RedirectToAction("LoginView");
             }
         }
-
-        // display the new venue form
         public ActionResult InsertVenue()
         {
+            // display the new venue form
             // pass in an empty venue to avoid null system errors
             VenueModel emptyVenue = new VenueModel();
             return View("VenueFormView", emptyVenue);
         }
 
-        // saves an image to the Images folder and calls helper method to insert data into the database
         [HttpPost]
         public ActionResult processVenueInsert(ImageModel imgModel, VenueModel venueModel)
         {
-            ServicesImplement venueService = new ServicesImplement();
-            VenueModel venue = venueService.retrieveOneVenue(venueModel.id);
+            // saves an image to the Images folder and calls helper method to insert data into the database
+            VenueModel venue = service.retrieveOneVenue(venueModel.id);
             string filePath = Path.Combine(Server.MapPath(venue.layoutURL));
 
             // if the file exists in the images folder, delete it
@@ -113,41 +114,33 @@ namespace SeatView.Controllers
             // save the image path and new venue into database
             return processVenueRequest(venueModel);
         }
-
-        // display venue form with editable fields for a specific venue by id
         public ActionResult UpdateVenue(int id)
         {
-            ServicesImplement venueService = new ServicesImplement();
-            VenueModel venue = venueService.retrieveOneVenue(id);
-
+            // display venue form with editable fields for a specific venue by id
+            VenueModel venue = service.retrieveOneVenue(id);
             return View("VenueFormView", venue);
         }
-
-        // process the insert/Update of a new venue
         public ActionResult processVenueRequest(VenueModel newVenue)
         {
-            // create a service
-            ServicesImplement venue = new ServicesImplement();
+            // process the insert/Update of a new venue
             int ownerID = (int)Session["id"];
 
             // if the sqlQuery into the database comes back without an error...
-            if (venue.insertOrUpdateVenue(newVenue, ownerID))
+            if (service.insertOrUpdateVenue(newVenue, ownerID))
             {
                 // display the list of venues for the owner
                 return displayVenues();
             }
             else
             {
-                return View("LoginFailed");
+                return View("Error");
             }
         }
-
         public ActionResult DeleteVenue(int id)
         {
-            ServicesImplement venueService = new ServicesImplement();
             // delete the file in the Images folder first
             // get the layoutURL for the specific venue
-            VenueModel venue = venueService.retrieveOneVenue(id);
+            VenueModel venue = service.retrieveOneVenue(id);
 
             // get the full path to the image to delete
             string filePath = Path.Combine(Server.MapPath(venue.layoutURL));
@@ -159,14 +152,14 @@ namespace SeatView.Controllers
                 file.Delete();
             }
 
-            if (venueService.deleteVenue(id))
+            if (service.deleteVenue(id))
             {
                 // successful delete
                 return displayVenues();
             }
             else
             {
-                return View("LoginFailed");
+                return View("Error");
             }
         }
     }

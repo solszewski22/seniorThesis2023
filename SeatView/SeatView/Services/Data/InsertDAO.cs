@@ -12,9 +12,9 @@ namespace SeatView.Services.Data
         // connection string to connect to the database on the server (database location path)
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SeatViewDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        // method that returns true if the query insert is successful
         internal bool InsertOwner(OwnerModel ownerModel)
         {
+            // method that returns true if the query insert is successful
             bool retVal = false;
 
             // database query string to insert the entered new owner

@@ -15,10 +15,9 @@ namespace SeatView.Controllers
         {
             return View("NewAccountView");
         }
-
-        // a method that calls a service to query the database and insert a new owner
         public ActionResult AccountCreation(OwnerModel ownerModel)
         {
+            // a method that calls a service to query the database and insert a new owner
             // if the insert is successful, login in the user to the 'OwnerLoginView'
             // else show a login failure message/page
             ServicesImplement insertService = new ServicesImplement();

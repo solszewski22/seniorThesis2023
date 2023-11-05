@@ -1,0 +1,56 @@
+﻿@model SeatView.Models.VenueSeatModel
+@{
+    ViewBag.Title = "VenueUserDetailsView";
+}
+
+<h2>VenueUserDetailsView</h2>
+
+<img src="@Url.Content(Model.venueLayout)" width="250" height="250" alt="layoutImg" id="layout" />
+
+<p>
+    @Html.ActionLink("Choose From Layout", "chooseFromLayout", "Venue")
+</p>
+
+@using (Html.BeginForm("searchSeat", "Venue", FormMethod.Post))
+{
+    <input type="text" name="searchString" />
+    <button type="submit" class="btn btn-primary">Search</button>
+
+    @Html.ActionLink("Clear Search", "clearSeatSearch", "Venue")
+
+    <table class="table">
+        <tr>
+            <th>
+                <label class="col-sm-2 col-form-label">Section</label>
+            </th>
+            <th>
+                <label class="col-sm-2 col-form-label">Row</label>
+            </th>
+            <th>
+                <label class="col-sm-2 col-form-label">Seat Number</label>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.seats)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.section)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.row)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.seatNum)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "UserSeatIndex", "Seat", new { id = item.id }, new { id = item.id })
+                </td>
+            </tr>
+        }
+    </table>
+}
+<p>
+    @Html.ActionLink("Back to List", "UserIndex", "Venue")
+</p>

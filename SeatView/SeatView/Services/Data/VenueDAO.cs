@@ -56,10 +56,51 @@ namespace SeatView.Services.Data
                 return returnListOfVenues;
             }
         }
+        internal List<VenueModel> getAllVenues()
+        {
+            // create a list of venues to be returned from the method
+            List<VenueModel> returnListOfVenues = new List<VenueModel>();
 
-        // get a specific venue based on the given id
+            string queryString = "SELECT * FROM Venues";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        // loop through each row and add the contents to a local venue variable that can be added to the return list of venues
+                        while (reader.Read())
+                        {
+                            VenueModel currVenue = new VenueModel();
+                            currVenue.id = reader.GetInt32(0);
+                            currVenue.name = reader.GetString(1);
+                            currVenue.address = reader.GetString(2);
+                            currVenue.street = reader.GetString(3);
+                            currVenue.city = reader.GetString(4);
+                            currVenue.state = reader.GetString(5);
+                            currVenue.zipCode = reader.GetString(6);
+                            currVenue.layoutURL = reader.GetString(7);
+
+                            returnListOfVenues.Add(currVenue);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return returnListOfVenues;
+            }
+        }
         internal VenueModel getVenueByID(int venueID)
         {
+            // get a specific venue based on the given id
             string queryString = "SELECT * FROM Venues WHERE id = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -96,10 +137,53 @@ namespace SeatView.Services.Data
                 return returnVenue;
             }
         }
+        internal List<VenueModel> getVenueBySearch(string searchString)
+        {
+            string search = '%' + searchString + '%';
+            List<VenueModel> returnListOfVenues = new List<VenueModel>();
 
-        // add a venue to the database
+            string queryString = "SELECT * FROM Venues WHERE street LIKE @search OR name LIKE @search OR address LIKE @search OR city LIKE @search OR state LIKE @search OR zip LIKE @search";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                command.Parameters.Add("@search", System.Data.SqlDbType.VarChar).Value = search;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        // loop through each row and add the contents to a local venue variable that can be added to the return list of venues
+                        while (reader.Read())
+                        {
+                            VenueModel currVenue = new VenueModel();
+                            currVenue.id = reader.GetInt32(0);
+                            currVenue.name = reader.GetString(1);
+                            currVenue.address = reader.GetString(2);
+                            currVenue.street = reader.GetString(3);
+                            currVenue.city = reader.GetString(4);
+                            currVenue.state = reader.GetString(5);
+                            currVenue.zipCode = reader.GetString(6);
+                            currVenue.layoutURL = reader.GetString(7);
+
+                            returnListOfVenues.Add(currVenue);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                return returnListOfVenues;
+            }
+        }
         internal bool addOrUpdateVenue(VenueModel venue, int ownerID)
         {
+            // add a venue to the database
             bool retVal = false;
             string queryString = "";
 
@@ -154,10 +238,9 @@ namespace SeatView.Services.Data
             }
             return retVal;
         }
-
-        // delete a venue in the database
         internal bool deleteVenue(int id)
         {
+            // delete a venue in the database
             bool retVal = false;
 
             // gather media IDs
@@ -208,10 +291,9 @@ namespace SeatView.Services.Data
             }
             return retVal;
         }
-
-        // get a list of media ids to delete that are related to the seats in a venue to be deleted
         private List<int> queryMediaIDs(int venueID)
         {
+            // get a list of media ids to delete that are related to the seats in a venue to be deleted
             List<int> returnIDs = new List<int>();
             string queryString = "SELECT Media.id FROM Seats, Media WHERE Seats.mediaID = Media.id AND Seats.venueID = @id";
 
@@ -243,10 +325,9 @@ namespace SeatView.Services.Data
             }
             return returnIDs;
         }
-
-        // get a list of seat ids to delete that are related to a venue to be deleted
         private List<int> querySeatIDs (int venueID)
         {
+            // get a list of seat ids to delete that are related to a venue to be deleted
             List<int> returnIDs = new List<int>();
             string queryString = "SELECT Seats.id  FROM Seats WHERE Seats.venueID = @id";
 
@@ -278,10 +359,9 @@ namespace SeatView.Services.Data
             }
             return returnIDs;
         }
-
-        // loop through media ids and call a sql query to delete
         public bool deleteByMediaID(int id)
         {
+            // loop through media ids and call a sql query to delete
             bool retVal = false;
             string queryString = "DELETE FROM Media WHERE id = @id";
 
@@ -307,11 +387,10 @@ namespace SeatView.Services.Data
                 }
             }
             return retVal;
-        }
-
-        // loop through seat ids and call a sql query to delete 
+        } 
         public bool deleteBySeatID(int id)
         {
+            // loop through seat ids and call a sql query to delete
             bool retVal = false;
             string queryString = "DELETE FROM Seats WHERE id = @id";
 

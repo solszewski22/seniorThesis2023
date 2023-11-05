@@ -124,6 +124,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewAccountController.cs" />
     <Compile Include="Controllers\SeatController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,10 +188,16 @@
     <Content Include="Views\Venue\SeatFormView.cshtml" />
     <Content Include="Views\Seat\SeatDetails.cshtml" />
     <Content Include="Views\Venue\AddSeatView.cshtml" />
+    <Content Include="Views\Venue\UserView.cshtml" />
+    <Content Include="Views\Venue\VenueUserDetailsView.cshtml" />
+    <Content Include="Views\Seat\UserSeatDetails.cshtml" />
+    <Content Include="Views\Venue\SeatByLayoutView.cshtml" />
+    <Content Include="Views\Venue\MediaView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

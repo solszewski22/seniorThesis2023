@@ -1,0 +1,45 @@
+﻿@model SeatView.Models.VenueModel
+
+@{
+    ViewBag.Title = "SeatByLayoutView";
+}
+
+<h2>SeatByLayoutView</h2>
+
+<div>
+    <h4>VenueModel</h4>
+    <hr />
+
+    <img src="@Url.Content(Model.layoutURL)" width="250" height="250" alt="layoutImg" id="layout" />
+
+    @using (Html.BeginForm("requestSeatView", "Venue"))
+    {
+        <input type="hidden" value="" id="x_coord" name="x_coord" />
+        <input type="hidden" value="" id="y_coord" name="y_coord" />
+        <input type="hidden" value=@Model.id name="id" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
+    <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.address) @Html.DisplayFor(model => model.street) @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.state) @Html.DisplayFor(model => model.zipCode)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "displayVenueDetails", "Venue")
+</p>
+
+
+<script>
+    document.getElementById("layout").addEventListener('click', function (e) {
+        //once the image is clicked set the hidden attributes to the offset values of the mouse click
+        document.getElementById("x_coord").setAttribute("value", e.offsetX);
+        document.getElementById("y_coord").setAttribute("value", e.offsetY);
+
+        alert("Seat Selected, Click Submit to Proceed.");
+
+    });
+</script>

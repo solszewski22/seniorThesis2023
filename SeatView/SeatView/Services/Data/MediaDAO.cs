@@ -11,9 +11,9 @@ namespace SeatView.Services.Data
     {
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SeatViewDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        // method to retrieve one media from the Media table
         internal ImageModel getMediaByID(int mediaID)
         {
+            // method to retrieve one media from the Media table
             string queryString = "SELECT * FROM Media WHERE id = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -44,10 +44,9 @@ namespace SeatView.Services.Data
                 return returnMedia;
             }
         }
-
-        // update the media table with new information
         internal bool updateMedia(ImageModel imgModel)
         {
+            // update the media table with new information
             bool retVal = false;
 
             string queryString = "UPDATE Media SET imgURL = @url WHERE id = @id";
@@ -76,10 +75,9 @@ namespace SeatView.Services.Data
             }
             return retVal;
         }
-
-        // insert an image into the database Media table and returned the new row's id
         internal int insertMedia(ImageModel imgModel)
         {
+            // insert an image into the database Media table and returned the new row's id
             Int32 retValID = 0;
 
             string queryString = "INSERT INTO MEDIA (imgUrl) VALUES (@url);" + "SELECT CAST(scope_identity() AS int);";
