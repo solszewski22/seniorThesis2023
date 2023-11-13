@@ -1,0 +1,168 @@
+﻿.homePageTitle {
+    text-align:center; 
+    padding: 50px 0px 50px 0px;
+}
+
+.centerContent {
+    display: flex; 
+    text-align: center; 
+    justify-content: center;
+}
+
+.homePageCards {
+    padding-bottom: 20px;
+}
+
+.homePageCard-getStarted {
+   max-width: 20rem; 
+   margin-right: 50px; 
+   padding: 40px 40px 40px 40px;
+}
+
+.homePageCard-findSeat {
+    max-width: 20rem; 
+    padding: 40px 40px 40px 40px;
+}
+
+.loginPage {
+    margin: 0; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.loginCard {
+   width: 35rem;
+}
+
+.pageCenterContent {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.loginInputField {
+    width: 30em;
+}
+
+.loginBtn {
+    margin-top: 20px; 
+    padding: 5px 50px 5px 50px; 
+    border-radius: 20px;
+}
+
+.newAccountForm {
+    margin: 150px 0px 50px 0px; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.newAccountCard {
+    width: 35rem;
+}
+
+.signUpBtn {
+    margin-top: 20px; 
+    padding: 5px 50px 5px 50px; 
+    border-radius: 20px;
+}
+
+.ownerGreeting {
+    padding: 30px 0px 30px 0px;
+}
+
+.venueListings {
+    text-indent: 20px;
+}
+
+.venueActionLinks {
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.venueEditLink {
+    text-decoration: none; 
+    color: #F39C12;
+}
+
+.venueEditLink:hover {
+    text-decoration: underline;
+    color: #F39C12;
+}
+
+.venueDetailsLink {
+    text-decoration: none;
+}
+
+.venueDetailsLink:hover {
+    text-decoration: underline;
+    color: #18BC9C;
+}
+
+.venueDeleteLink {
+    text-decoration: none;
+    color: #E74C3C;
+}
+.venueDeleteLink:hover {
+    text-decoration: underline;
+    color: #E74C3C;
+}
+
+.venueBreadcrumbs {
+    padding: 10px 0px 10px 0px;
+}
+
+.venueBackLink {
+    text-decoration: none;
+    color: #F39C12;
+}
+
+.venueBackLink:hover {
+    text-decoration: underline;
+    color: #F39C12
+}
+
+.venueEditLayoutLink {
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.venueEditLayoutLink:hover {
+    text-decoration: underline;
+    color: #18BC9C;
+}
+
+.addVenueHeader {
+    text-align:center; 
+    padding: 20px 0px 20px 0px;
+}
+
+.venueFormFields {
+    width: 50em;
+}
+
+.venueFormSaveBtnWrapper {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.venueFormSaveBtn {
+    margin-top: 20px; 
+    padding: 5px 50px 5px 50px; 
+    border-radius: 20px;
+}
+
+.venueLayoutImg {
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.seatTable {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}

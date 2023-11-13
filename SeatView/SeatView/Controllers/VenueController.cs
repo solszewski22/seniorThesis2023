@@ -41,9 +41,12 @@ namespace SeatView.Controllers
             // get a list of SeatModels
             List<SeatModel> seats = service.getSeatsForVenue(venueID);
 
+            VenueModel venue = service.retrieveOneVenue(venueID);
+
             // create a dual model to display the layout image and list of seats
             VenueSeatModel dualModel = new VenueSeatModel();
             dualModel.venueLayout = url;
+            dualModel.venueName = venue.name;
             dualModel.seats = seats;
 
             return View("LayoutInfoView", dualModel);

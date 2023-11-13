@@ -4,10 +4,62 @@
     ViewBag.Title = "VenueFormView";
 }
 
-<h2>InsertVenueView</h2>
+<div class="venueBreadcrumbs">
+    @Html.ActionLink("Back to List", "displayVenues", "Login", new { @class = "btn btn-link venueBackLink" })
+    /
+    @if (Model.id > 0)
+    {
+       @Html.ActionLink("Edit Layout", "editLayout", "Venue", new { id = Model.id, url = Model.layoutURL }, new { @class = "btn btn-link venueEditLayoutLink"})
+    }
+</div>
+
+<h2 class="addVenueHeader">Add a Venue</h2>
 
 
-@using (Html.BeginForm("processVenueInsert", "Login", FormMethod.Post, new { enctype = "multipart/form-data" } ))
+<div class="pageCenterContent">
+    @using (Html.BeginForm("processVenueInsert", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label class="form-label mt-4">Name</label>
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control venueFormFields", required = "required", placeholder = "Enter Name" } })
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4">Address</label>
+            @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control venueFormFields", placeholder = "Enter Address" } })
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4">Street</label>
+            @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control venueFormFields", placeholder = "Enter Street" } })
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4">City</label>
+            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control venueFormFields", required = "required", placeholder = "Enter City" } })
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4">State</label>
+            @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control venueFormFields", required = "required", placeholder = "Choose State" } })
+        </div>
+        <div class="form-group">
+            <label class="form-label mt-4">Zip Code</label>
+            @Html.EditorFor(model => model.zipCode, new { htmlAttributes = new { @class = "form-control venueFormFields", placeholder = "Enter Zip Code" } })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label mt-4">Upload Image</label><br/>
+            <input type="file" name="imageFileName" requried="required">
+        </div>
+
+        <input type="hidden" name="layoutURL" value="@Model.layoutURL" />
+        <input type="hidden" name="id" value="@Model.id" />
+
+        <div class="venueFormSaveBtnWrapper">
+            <button type="submit" class="btn btn-primary venueFormSaveBtn">Save</button>
+        </div>
+    }
+</div>
+
+
+@*@using (Html.BeginForm("processVenueInsert", "Login", FormMethod.Post, new { enctype = "multipart/form-data" } ))
 {
     <div class="row mb-3">
         <label class="col-sm-2 col-form-label">Name</label>
@@ -55,17 +107,15 @@
     <input type="hidden" name="layoutURL" value="@Model.layoutURL" />
     <input type="hidden" name="id" value="@Model.id" />
 
-    <button type="submit" class="btn btn-primary">Save</button>
-}
+    <button type="submit" class="btn btn-primary">Save</button>*@
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "displayVenues", "Login")
     @if (Model.id > 0)
     {
         @Html.ActionLink("Edit Layout", "editLayout", "Venue", new { id = Model.id, url = Model.layoutURL }, new { id = Model.id, url = Model.layoutURL })
     }
-
-</div>
+</div>*@
 
 @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

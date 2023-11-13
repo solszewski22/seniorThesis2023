@@ -12,5 +12,9 @@ namespace SeatView.Controllers
         {
             return View();
         }
+        public ActionResult UserLogin()
+        {
+            return View("LoginView");
+        }
     }
 }

@@ -3,14 +3,52 @@
     ViewBag.Title = "LoginView";
 }
 
-<h2>Login</h2>
+<div style="margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="card border-success mb-3" style="width: 35rem;">
+        <div class="card-body">
+            <h2 class="card-title" style="text-align: center">Login</h2>
+            <div style="display: flex; justify-content: center; align-items: center">
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Enter Username", style = "width: 30em" } })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", required = "required", placeholder = "Enter Password", autocomplete = "off", style = "width: 30em" } })
+                    </div>
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 20px; padding: 5px 50px 5px 50px; border-radius: 20px">Login</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post))
+
+
+@*<h2>Login</h2>*@
+
+@*@using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
-    <div class="row mb-3">
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Enter Username" } })
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", required = "required", placeholder = "Enter Password", autocomplete = "off" } })
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 20px">Login</button>
+}*@
+
+
+@*<div class="row mb-3">
         <label class="col-sm-2 col-form-label">Username</label>
         <div class="col-sm-10">
-            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" , required = "required" } })
+            @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", required = "required" } })
         </div>
     </div>
     <div class="row mb-3">
@@ -18,6 +56,4 @@
         <div class="col-sm-10">
             @Html.PasswordFor(model => model.password, new { htmlAttributes = new { @class = "form-control", required = "required" } })
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-}
+    </div>*@

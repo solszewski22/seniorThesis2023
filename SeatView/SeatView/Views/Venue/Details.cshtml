@@ -4,71 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>VenueView</h2>
-
-<div>
-    <h4>VenueModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.state)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.state)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.zipCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.zipCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.layoutURL)
-        </dt>
-
-        <dd>
-            <img src="@Url.Content(Model.layoutURL)" width="250" height="250" alt="layoutImg"/>
-        </dd>
-
-    </dl>
+<div class="venueBreadcrumbs">
+    @Html.ActionLink("Back to List", "displayVenues", "Login", new { }, new { @class = "btn btn-link venueBackLink" }) /
+    @Html.ActionLink("Edit Venue", "UpdateVenue", "Login", new { id = Model.id }, new { @class = "btn btn-link venueEditLayoutLink" })
 </div>
-<p>
-    @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = Model.id }, new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "displayVenues", "Login")
+
+<h2 class="text-center addVenueHeader">@Html.DisplayFor(model => model.name)</h2>
+<p class="text-center">
+    @Html.DisplayFor(model => model.address) @Html.DisplayNameFor(model => model.street) @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.state) @Html.DisplayFor(model => model.zipCode)
 </p>
+<hr />
+<img src="@Url.Content(Model.layoutURL)" class="venueLayoutImg" width ="250"height="250" alt="layoutImg"/>

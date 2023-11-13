@@ -4,32 +4,16 @@
     ViewBag.Title = "OwnerLoginView";
 }
 @*this displays the first name of the owner from the owner variable in the OwnerVenueModel*@
-<h2>Hello @Html.DisplayFor(model => model.ownerName)</h2>
+<h2 class="text-success ownerGreeting">Welcome @Html.DisplayFor(model => model.ownerName)!</h2>
 
-<p>
-    @Html.ActionLink("Create New", "InsertVenue", "Login")
-</p>
 <table class="table">
     <tr>
-        <th>
-            <label class="col-sm-2 col-form-label">Name</label>
-        </th>
-        <th>
-            <label class="col-sm-2 col-form-label">Address</label>
-        </th>
-        <th>
-            <label class="col-sm-2 col-form-label">Street</label>
-        </th>
-        <th>
-            <label class="col-sm-2 col-form-label">City</label>
-        </th>
-        <th>
-            <label class="col-sm-2 col-form-label">State</label>
-        </th>
-        <th>
-            <label class="col-sm-2 col-form-label">Zip Code</label>
-        </th>
         <th></th>
+        <th>
+            <p class="text-center">
+                @Html.ActionLink("Add New Venue", "InsertVenue", "Login", new { area = "" }, new { @class = "btn btn-outline-primary" })
+            </p>
+        </th>
     </tr>
     @*this loops through the venue list in the OwnerVenueModel*@
     @foreach (var item in Model.venues)
@@ -37,28 +21,15 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
+                <p class="venueListings">
+                    @Html.DisplayFor(modelItem => item.address) @Html.DisplayFor(modelItem => item.street) @Html.DisplayFor(modelItem => item.city), @Html.DisplayFor(modelItem => item.state) @Html.DisplayFor(modelItem => item.zipCode)
+                </p>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.state)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.zipCode)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = item.id }, new { id = item.id }) |
-                @Html.ActionLink("Details", "Index", "Venue", new { id = item.id }, new { id = item.id }) |
-                @Html.ActionLink("Delete", "DeleteVenue", "Login", new { id = item.id }, new { id = item.id })
+            <td class="venueActionLinks">
+                @Html.ActionLink("Edit", "UpdateVenue", "Login", new { id = item.id }, new { @class = "btn btn-link venueEditLink" }) |
+                @Html.ActionLink("Details", "Index", "Venue", new { id = item.id }, new { @class = "btn btn-link venueDetailsLink" }) |
+                @Html.ActionLink("Delete", "DeleteVenue", "Login", new { id = item.id }, new { @class = "btn btn-link venueDeleteLink" })
             </td>
         </tr>
     }
-
 </table>

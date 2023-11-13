@@ -3,48 +3,49 @@
     ViewBag.Title = "LayoutInfoView";
 }
 
-<h2>LayoutInfoView</h2>
+<div class="venueBreadcrumbs">
+    @Html.ActionLink("Back to List", "displayVenues", "Login", new { }, new { @class = "btn btn-link venueBackLink" })
+</div>
 
-<img src="@Url.Content(Model.venueLayout)" width="250" height="250" alt="layoutImg" />
+<h2 class="text-center addVenueHeader">@Model.venueName</h2>
+<hr/>
+<img src="@Url.Content(Model.venueLayout)" width="250" height="250" class="venueLayoutImg" alt="layoutImg" />
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "InsertSeat", "Venue")
-</p>
+</p>*@
 
-<table class="table">
+<table class="table seatTable">
     <tr>
         <th>
-            <label class="col-sm-2 col-form-label">Section</label>
+            <p>
+                @Html.ActionLink("Create New", "InsertSeat", "Venue", new { area = "" }, new { @class = "btn btn-outline-primary" })
+            </p>
         </th>
-        <th>
+        <th></th>
+        @*<th>
             <label class="col-sm-2 col-form-label">Row</label>
         </th>
         <th>
             <label class="col-sm-2 col-form-label">Seat Number</label>
         </th>
-        <th></th>
+        <th></th>*@
     </tr>
 
     @foreach (var item in Model.seats)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.section)
+                Section @Html.DisplayFor(modelItem => item.section), Row @Html.DisplayFor(modelItem => item.row), Seat @Html.DisplayFor(modelItem => item.seatNum)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.row)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.seatNum)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "UpdateSeat", "Venue", new { id = item.id }, new { id = item.id }) |
-                @Html.ActionLink("Details", "Index", "Seat", new { id = item.id }, new { id = item.id }) |
-                @Html.ActionLink("Delete", "DeleteSeat", "Venue", new { id = item.id }, new { id = item.id })
+            <td class="venueActionLinks">
+                @Html.ActionLink("Edit", "UpdateSeat", "Venue", new { id = item.id }, new { @class = "btn btn-link venueEditLink" }) |
+                @Html.ActionLink("Details", "Index", "Seat", new { id = item.id }, new { @class = "btn btn-link venueDetailsLink" }) |
+                @Html.ActionLink("Delete", "DeleteSeat", "Venue", new { id = item.id }, new { @class = "btn btn-link venueDeleteLink" })
             </td>
         </tr>
     }
 </table>
-<p>
+@*<p>
     @Html.ActionLink("Back to List", "displayVenues", "Login")
-</p>
+</p>*@

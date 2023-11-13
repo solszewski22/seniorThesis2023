@@ -2,10 +2,20 @@
     ViewBag.Title = "Home";
 }
 
-<div class="jumbotron">
-    <h1>SeatView</h1>
-    @*Html.ActionLink("Display Name", "Name of method in controller", "Name of controller")*@
-    @Html.ActionLink("Create Account", "Index", "NewAccount")
-    @Html.ActionLink("Find My Seat", "UserIndex", "Venue")
-
+<div>
+    <h1 class="homePageTitle">Seat View</h1>
+    <div class="centerContent">
+        <div class="card border-success mb-3 homePageCard-getStarted">
+            <div class="card-body">
+                <h4 class="card-title text-success text-center homePageCards">Venue Owner</h4>
+                @Html.ActionLink("Get Started", "Index", "NewAccount", new { area = "" }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="card border-success mb-3 homePageCard-findSeat">
+            <div class="card-body">
+                <h4 class="card-title text-success text-center homePageCards">Find My Seat</h4>
+                @Html.ActionLink("View Seat", "UserIndex", "Venue", new { area = "" }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
 </div>

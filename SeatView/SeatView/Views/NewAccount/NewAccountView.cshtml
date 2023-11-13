@@ -3,10 +3,50 @@
     ViewBag.Title = "NewAccountView";
 }
 
-<h2>Create Account</h2>
+<div class="newAccountForm">
+    <div class="card border-success mb-3 newAccountCard">
+        <div class="card-body">
+            <h2 class="card-title text-center">Create Account</h2>
+            <div class="pageCenterContent">
+                @using (Html.BeginForm("AccountCreation", "NewAccount", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label class="form-label mt-4">First Name</label>
+                        @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control loginInputField", required = "required" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label mt-4">Last Name</label>
+                        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control loginInputField" } })
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label mt-4">Company Name</label>
+                        @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control loginInputField" } })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
+                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control loginInputField", required = "required", placeholder = "Enter Username" } })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control loginInputField", type = "password", required = "required", placeholder = "Enter Password", autocomplete = "off" } })
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary signUpBtn">Sign Up</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--<h2>Create Account</h2>-->
 
 @*@using (Html.BeginForm([Action/Method in Controller], [Name of Controller/Route to perform], [HTTP Method]))*@
-@using (Html.BeginForm("AccountCreation", "NewAccount", FormMethod.Post))
+<!--@using (Html.BeginForm("AccountCreation", "NewAccount", FormMethod.Post))
 {
     <div class="row mb-3">
         <label class="col-sm-2 col-form-label">First Name</label>
@@ -39,5 +79,5 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Sign Up</button>
-}
+}-->
 
