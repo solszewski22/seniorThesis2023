@@ -1,0 +1,91 @@
+﻿@model SeatView.Models.VenueSeatMediaModel
+
+@{
+    ViewBag.Title = "SeatByLayoutView";
+}
+
+<div class="venueBreadcrumbs">
+    @Html.ActionLink("Back to List", "displayVenueDetails", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+</div>
+
+<h2 class="text-center addVenueHeader">@Html.DisplayFor(model => model.venue.name)</h2>
+
+<img src="@Url.Content(Model.venue.layoutURL)" class="venueLayoutImg" width="250" height="250" alt="layoutImg" id="layout" />
+
+
+@using (Html.BeginForm("requestSeatView", "Venue"))
+{
+    <input type="hidden" value="" id="x_coord" name="x_coord" />
+    <input type="hidden" value="" id="y_coord" name="y_coord" />
+    <input type="hidden" value=@Model.venue.id name="id" />
+    <div class="text-center seatByClickBtnGroup">
+        <button type="button" class="btn btn-info seatByClickBtn" id="chooseSeatBtn">Choose Seat</button>
+        <button type="button" class="btn btn-warning seatByClickBtn" id="clearBtn">Clear</button>
+        <button type="submit" class="btn btn-success seatByClickBtn" id="goBtn">Go</button>
+    </div>
+}
+
+<div class="pageCenterContent seatAlert">
+    <div class="alert alert-success text-center hidden" id="seatAlert" style="padding: 5px 20px 5px 20px;width: 400px">
+        <strong>Seat Selected!</strong> Click Go to see your view.
+    </div>
+</div>
+
+<hr />
+
+<div class="row justify-content-evenly">
+    @foreach (var item in Model.seatMedias)
+    {
+        <div class="col-4">
+            <img src="@Url.Content(item.media.mediaURL)" width="250" height="250" alt="seatImg" />
+            <p>
+                Section @Html.DisplayFor(modelItem => item.seat.section), Row @Html.DisplayFor(modelItem => item.seat.row), Seat Number @Html.DisplayFor(modelItem => item.seat.seatNum)
+            </p>
+        </div>
+    }
+</div>
+
+
+<script>
+    let isInClickMode = false;
+
+    // eventListener for 'chooseSeatBtn'
+    document.getElementById("chooseSeatBtn").addEventListener('click', function (e) {
+        // not in click mode; disable the 'go' button, hide the success alert, disable the 'clear' button
+        if (!isInClickMode) {
+            document.getElementById("goBtn").classList.toggle("disabled");
+            document.getElementById("seatAlert").classList.add("hidden");
+            document.getElementById("clearBtn").classList.add("disabled");
+            isInClickMode = true;
+        }
+        // in click mode; undisable the 'go' button; update boolean 'isInClickMode' to true
+        else {
+            document.getElementById("goBtn").classList.toggle("disabled");
+            isInClickMode = false;
+        }
+    });
+
+    // eventListener for layout image
+    document.getElementById("layout").addEventListener('click', function (event) {
+        // in click mode; get x and y coordinates, make success alert visible, undisable 'go' and 'clear', disable 'chooseSeat'
+        if (isInClickMode) {
+            document.getElementById("x_coord").setAttribute("value", event.offsetX);
+            document.getElementById("y_coord").setAttribute("value", event.offsetY);
+            document.getElementById("seatAlert").classList.remove("hidden");
+
+            document.getElementById("goBtn").classList.remove("disabled");
+            document.getElementById("chooseSeatBtn").classList.add("disabled");
+            document.getElementById("clearBtn").classList.remove("disabled");
+        }
+    });
+
+    // eventListener for 'clearBtn'
+    document.getElementById("clearBtn").addEventListener('click', function (event) {
+        // update 'isInClickMode' to false, hide success alert, undisable 'chooseSeatBtn'
+        isInClickMode = false;
+        document.getElementById("seatAlert").classList.add("hidden");
+        document.getElementById("chooseSeatBtn").classList.remove("disabled");
+    });
+
+</script>
+

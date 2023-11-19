@@ -189,31 +189,69 @@ namespace SeatView.Controllers
             VenueSeatModel dualModel = new VenueSeatModel();
             dualModel.venueLayout = venue.layoutURL;
             dualModel.seats = seats;
+            dualModel.venueName = venue.name;
 
             return View("VenueUserDetailsView", dualModel);
         }
+        //public ActionResult chooseFromLayout()
+        //{
+        //    VenueModel venue = service.retrieveOneVenue((int)Session["userVenueID"]);
+        //    return View("SeatByClick", venue);
+
+        //    //return View("SeatByLayoutView", venue);
+        //}
+
         public ActionResult chooseFromLayout()
         {
-            VenueModel venue = service.retrieveOneVenue((int)Session["userVenueID"]);
-            return View("SeatByLayoutView", venue);
+            // here after "Select From Layout" button is clicked
+            VenueSeatMediaModel venueSeats = new VenueSeatMediaModel();
+
+            venueSeats.venue = service.retrieveOneVenue((int)Session["userVenueID"]);
+            venueSeats.seatMedias = new List<SeatMediaModel>();
+
+            return View("SeatByClick", venueSeats);
         }
+
         public ActionResult requestSeatView(int x_coord, int y_coord, int id)
         {
+            VenueSeatMediaModel venueSeats = new VenueSeatMediaModel();
+
+            venueSeats.venue = service.retrieveOneVenue((int)Session["userVenueID"]);
+            venueSeats.seatMedias = new List<SeatMediaModel>();
+
             List<SeatModel> seats = service.retrieveSeats(x_coord, y_coord, id);
 
-            List<SeatMediaModel> seatMedias = new List<SeatMediaModel>();
-            for(int i = 0; i < seats.Count(); i++)
+            for (int i = 0; i < seats.Count(); i++)
             {
                 SeatMediaModel seatMedia = new SeatMediaModel();
                 ImageModel seatImg = service.retrieveOneMedia(seats[i].mediaID);
 
                 seatMedia.media = seatImg;
                 seatMedia.seat = seats[i];
-                seatMedias.Add(seatMedia);
+                venueSeats.seatMedias.Add(seatMedia);
             }
 
-            return View("MediaView", seatMedias);
-        }  
+            return View("SeatByClick", venueSeats);
+        }
+        //public ActionResult requestSeatView(int x_coord, int y_coord, int id)
+        //{
+        //    VenueModel venue = service.retrieveOneVenue((int)Session["userVenueID"]);
+
+        //    List<SeatModel> seats = service.retrieveSeats(x_coord, y_coord, id);
+
+        //    List<SeatMediaModel> seatMedias = new List<SeatMediaModel>();
+        //    for(int i = 0; i < seats.Count(); i++)
+        //    {
+        //        SeatMediaModel seatMedia = new SeatMediaModel();
+        //        ImageModel seatImg = service.retrieveOneMedia(seats[i].mediaID);
+
+        //        seatMedia.media = seatImg;
+        //        seatMedia.seat = seats[i];
+        //        seatMedias.Add(seatMedia);
+        //    }
+
+        //    return View("MediaView", seatMedias);
+        //}  
         public ActionResult searchSeat(string searchString)
         {
             // search for specific seat based on passed in string
@@ -224,6 +262,7 @@ namespace SeatView.Controllers
 
             List<SeatModel> seats = service.retrieveSearchSeats(searchString);
             dualModel.seats = seats;
+            dualModel.venueName = venue.name;
 
             return View("VenueUserDetailsView", dualModel);
         }

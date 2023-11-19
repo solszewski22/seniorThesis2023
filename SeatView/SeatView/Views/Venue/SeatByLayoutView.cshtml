@@ -4,9 +4,24 @@
     ViewBag.Title = "SeatByLayoutView";
 }
 
-<h2>SeatByLayoutView</h2>
+<div class="venueBreadcrumbs">
+    @Html.ActionLink("Back to List", "displayVenueDetails", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+</div>
 
-<div>
+<h2 class="text-center addVenueHeader">@Html.DisplayFor(model => model.name)</h2>
+<hr />
+
+<img src="@Url.Content(Model.layoutURL)" class="venueLayoutImg" width="250" height="250" alt="layoutImg" id="layout" />
+@using (Html.BeginForm("requestSeatView", "Venue"))
+{
+    <input type="hidden" value="" id="x_coord" name="x_coord" />
+    <input type="hidden" value="" id="y_coord" name="y_coord" />
+    <input type="hidden" value=@Model.id name="id" />
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
+
+@*<div>
     <h4>VenueModel</h4>
     <hr />
 
@@ -30,7 +45,7 @@
 </div>
 <p>
     @Html.ActionLink("Back to List", "displayVenueDetails", "Venue")
-</p>
+</p>*@
 
 
 <script>
@@ -38,6 +53,11 @@
         //once the image is clicked set the hidden attributes to the offset values of the mouse click
         document.getElementById("x_coord").setAttribute("value", e.offsetX);
         document.getElementById("y_coord").setAttribute("value", e.offsetY);
+
+        //<div class="alert alert-dismissible alert-success">
+        //    <button type="button" class="btn-close" data-bs-dismiss="alert" fdprocessedid="yqjz3j"></button>
+        //    <strong>Seat Selected!</strong> Click Submit to Proceed.
+        //</div>
 
         alert("Seat Selected, Click Submit to Proceed.");
 

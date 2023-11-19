@@ -3,54 +3,43 @@
     ViewBag.Title = "VenueUserDetailsView";
 }
 
-<h2>VenueUserDetailsView</h2>
+<div class="venueBreadcrumbs">
+    @Html.ActionLink("Back to List", "UserIndex", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+</div>
 
-<img src="@Url.Content(Model.venueLayout)" width="250" height="250" alt="layoutImg" id="layout" />
+<h2 class="text-center addVenueHeader">@Model.venueName</h2>
+<hr />
+<img src="@Url.Content(Model.venueLayout)" width="250" height="250" class="venueLayoutImg" alt="layoutImg" id="layout" />
 
-<p>
-    @Html.ActionLink("Choose From Layout", "chooseFromLayout", "Venue")
-</p>
+<div class="seatSearch">
+    <p>
+        @Html.ActionLink("Select From Layout", "chooseFromLayout", "Venue", new { area = "" }, new { @class = "btn btn-outline-primary" })
+    </p>
 
-@using (Html.BeginForm("searchSeat", "Venue", FormMethod.Post))
-{
-    <input type="text" name="searchString" />
-    <button type="submit" class="btn btn-primary">Search</button>
+    @using (Html.BeginForm("searchSeat", "Venue", FormMethod.Post))
+    {
+        <div class="input-group mb-3">
+            <input type="text" class="form-control searchField" name="searchString" placeholder="Search..." aria-label="searchStringValue" aria-describedby="button-addon2" fdprocessedid="yco7z8">
+            <button class="btn btn-success" type="submit">Go</button>
+            @Html.ActionLink("Clear", "clearSeatSearch", "Venue", new { @class = "btn btn-warning" })
+        </div>
 
-    @Html.ActionLink("Clear Search", "clearSeatSearch", "Venue")
-
-    <table class="table">
-        <tr>
-            <th>
-                <label class="col-sm-2 col-form-label">Section</label>
-            </th>
-            <th>
-                <label class="col-sm-2 col-form-label">Row</label>
-            </th>
-            <th>
-                <label class="col-sm-2 col-form-label">Seat Number</label>
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.seats)
-        {
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.section)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.row)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.seatNum)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "UserSeatIndex", "Seat", new { id = item.id }, new { id = item.id })
-                </td>
+                <th></th>
+                <th></th>
             </tr>
-        }
-    </table>
-}
-<p>
-    @Html.ActionLink("Back to List", "UserIndex", "Venue")
-</p>
+            @foreach (var item in Model.seats)
+            {
+                <tr>
+                    <td>
+                        Section @Html.DisplayFor(modelItem => item.section), Row @Html.DisplayFor(modelItem => item.row), Seat Number @Html.DisplayFor(modelItem => item.seatNum)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "UserSeatIndex", "Seat", new { id = item.id }, new { @class = "btn btn-link venueDetailsLink" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

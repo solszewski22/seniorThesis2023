@@ -9,5 +9,6 @@ namespace SeatView.Models
     {
         public ImageModel media { get; set; }
         public SeatModel seat { get; set; }
+        public Boolean userAccessed { get; set; }
     }
 }

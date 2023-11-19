@@ -166,3 +166,41 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.seatFormFields {
+    width: 35em;
+}
+
+.insertSeatImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchField {
+    width: 50rem;
+}
+
+.seatSearch {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seatByClickBtnGroup {
+    padding-top: 20px;
+}
+
+.seatByClickBtn {
+    margin-right: 10px; 
+    border-radius: 20px;
+}
+
+.seatAlert {
+    margin-top: 20px;
+}
+
+.hidden{
+    visibility:hidden;
+    display: none;
+}

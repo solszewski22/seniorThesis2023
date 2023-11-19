@@ -4,42 +4,33 @@
     ViewBag.Title = "SeatDetails";
 }
 
-<h2>SeatDetails</h2>
+<div class="venueBreadcrumbs">
+    @if (!Model.userAccessed)
+    {
+        @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+        @: /
+        @Html.ActionLink("Edit Seat", "UpdateSeat", "Venue", new { id = Model.seat.id }, new { @class = "btn btn-link venueEditLayoutLink" })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "displayVenueDetails", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+
+    }
+</div>
+
+<h2 class="text-center addVenueHeader">Seat View</h2>
 
 <div>
-    <h4>SeatModel</h4>
-    <hr />
-
-    <img src="@Url.Content(Model.media.mediaURL)" width="250" height="250" alt="seatImg" />
-
-    <dl class="dl-horizontal">
-
-        <dt>
-            @Html.DisplayNameFor(model => model.seat.section)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.seat.section)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.seat.row)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.seat.row)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.seat.seatNum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.seat.seatNum)
-        </dd>
-    </dl>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <img src="@Url.Content(Model.media.mediaURL)" width="250" height="250" alt="seatImg" />
+        </div>
+        <div class="col-4">
+            <p>
+                Section @Html.DisplayFor(model => model.seat.section) <br /><br />
+                Row @Html.DisplayFor(model => model.seat.row) <br /><br />
+                Seat Number @Html.DisplayFor(model => model.seat.seatNum)
+            </p>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "UpdateSeat", "Venue", new { id = Model.seat.id }, new { id = Model.seat.id }) |
-    @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue")
-</p>
