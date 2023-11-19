@@ -12,15 +12,15 @@
                 {
                     <div class="form-group">
                         <label class="form-label mt-4">First Name</label>
-                        @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control loginInputField", required = "required" } })
+                        @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control loginInputField", required = "required", placeholder = "Enter First Name" } })
                     </div>
                     <div class="form-group">
                         <label class="form-label mt-4">Last Name</label>
-                        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control loginInputField" } })
+                        @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control loginInputField", placeholder = "Enter Last Name" } })
                     </div>
                     <div class="form-group">
                         <label class="form-label mt-4">Company Name</label>
-                        @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control loginInputField" } })
+                        @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control loginInputField", placeholder = "Enter Company" } })
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1" class="form-label mt-4">Username</label>

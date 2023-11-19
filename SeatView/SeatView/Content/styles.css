@@ -168,7 +168,7 @@
 }
 
 .seatFormFields {
-    width: 35em;
+    width: 30em;
 }
 
 .insertSeatImg {
@@ -203,4 +203,8 @@
 .hidden{
     visibility:hidden;
     display: none;
+}
+
+.seatText {
+    padding-top: 10px;
 }

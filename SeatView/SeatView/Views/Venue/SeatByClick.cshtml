@@ -36,9 +36,9 @@
 <div class="row justify-content-evenly">
     @foreach (var item in Model.seatMedias)
     {
-        <div class="col-4">
+       <div class="col-4 text-center">
             <img src="@Url.Content(item.media.mediaURL)" width="250" height="250" alt="seatImg" />
-            <p>
+            <p class="seatText text-dark">
                 Section @Html.DisplayFor(modelItem => item.seat.section), Row @Html.DisplayFor(modelItem => item.seat.row), Seat Number @Html.DisplayFor(modelItem => item.seat.seatNum)
             </p>
         </div>

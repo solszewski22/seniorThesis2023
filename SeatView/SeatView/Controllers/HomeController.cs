@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeatView.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace SeatView.Controllers
         }
         public ActionResult UserLogin()
         {
-            return View("LoginView");
+            return View("SharedLoginView");
         }
     }
 }

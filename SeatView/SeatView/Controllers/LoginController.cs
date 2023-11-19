@@ -18,10 +18,6 @@ namespace SeatView.Controllers
         {
             service = new ServicesImplement();
         }
-        //public ActionResult Index()
-        //{
-        //    return View("LoginView");
-        //}
 
         public ActionResult Login(OwnerModel ownerModel)
         {
@@ -42,7 +38,7 @@ namespace SeatView.Controllers
             }
             else
             {
-                return View("LoginView");
+                return View("SharedLoginView", ownerModel);
             }
         }
         public ActionResult displayVenues()
