@@ -1,0 +1,36 @@
+﻿@model SeatView.Models.SeatMediaModel
+
+@{
+    ViewBag.Title = "SeatDetails";
+}
+
+<div class="venueBreadcrumbs">
+    @if (!Model.userAccessed)
+    {
+        @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+        @: /
+        @Html.ActionLink("Edit Seat", "UpdateSeat", "Venue", new { id = Model.seat.id }, new { @class = "btn btn-link venueEditLayoutLink" })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "displayVenueDetails", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+
+    }
+</div>
+
+<h2 class="text-center addVenueHeader">Seat View</h2>
+
+<div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <img src="@Url.Content(Model.media.mediaURL)" width="250" height="250" alt="seatImg" />
+        </div>
+        <div class="col-4">
+            <p>
+                Section @Html.DisplayFor(model => model.seat.section) <br /><br />
+                Row @Html.DisplayFor(model => model.seat.row) <br /><br />
+                Seat Number @Html.DisplayFor(model => model.seat.seatNum)
+            </p>
+        </div>
+    </div>
+</div>

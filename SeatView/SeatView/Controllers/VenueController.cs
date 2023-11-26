@@ -118,6 +118,7 @@ namespace SeatView.Controllers
             SeatModel seat = new SeatModel();
             seat.venueUrl = Session["layoutURL"].ToString();
             return View("AddSeatView", seat);
+            //return View("AddSeatView", seat);
         }
         public ActionResult processSeatInsert(SeatModel seat, ImageModel img)
         {

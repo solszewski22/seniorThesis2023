@@ -11,11 +11,21 @@ namespace SeatView.Controllers
     {
         public ActionResult Index()
         {
+            Session["id"] = null;
             return View();
         }
         public ActionResult UserLogin()
         {
             return View("SharedLoginView");
+        }
+
+        public ActionResult UserLoginFailure()
+        {
+            OwnerModel ownerModel = new OwnerModel();
+            ownerModel.username = TempData["username"].ToString();
+            ownerModel.password = TempData["password"].ToString();
+
+            return View("SharedLoginView", ownerModel);
         }
     }
 }

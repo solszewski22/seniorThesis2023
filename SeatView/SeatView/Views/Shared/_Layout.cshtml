@@ -12,21 +12,28 @@
 
 @{
     var routeUrl = this.Url.RouteUrl(ViewContext.RouteData.Values);
-    var area = routeUrl.Split('/')[1];
-    var status = "Logout"; // better way to account for users as well
-    if (area == "Home" | area == "" | area == "NewAccount")
+    var totalRoute = routeUrl.Split('/');
+    var paramOne = totalRoute[1];
+    if(totalRoute.Length > 2)
     {
-        status = "Login";
+        paramOne = totalRoute[2];
     }
 }
 
-<body id="@area">
+<body id="@paramOne">
     <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
         <div class="container-fluid">
             @Html.ActionLink("Seat View", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    @Html.ActionLink(status, "UserLogin", "Home", new { area = "" }, new { @class = "nav-link" })
+                    @if (Session["id"] == null)
+                    {
+                        @Html.ActionLink("Login", "UserLogin", "Home", new { area = "" }, new { @class = "nav-link" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Logout", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                    }
                 </li>
             </ul>
         </div>
@@ -35,11 +42,8 @@
         @RenderBody()
     </div>
 
-    <style>
-        #Home {
-            background-color: #18BC9C;
-        }
-        #NewAccount {
+    <style>       
+        #UserLogin, #UserLoginFailure, #NewAccount {
             background-color: #18BC9C;
         }
     </style>

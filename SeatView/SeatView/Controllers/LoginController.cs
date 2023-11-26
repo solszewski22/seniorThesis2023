@@ -18,9 +18,10 @@ namespace SeatView.Controllers
         {
             service = new ServicesImplement();
         }
-
         public ActionResult Login(OwnerModel ownerModel)
         {
+            TempData["username"] = ownerModel.username;
+            TempData["password"] = ownerModel.password;
             // a method that returns an action (more specifically a view or page) after database verifies that 
             // the username and password are present
             // authenticate whether the entered credentials are found in the database
@@ -38,7 +39,7 @@ namespace SeatView.Controllers
             }
             else
             {
-                return View("SharedLoginView", ownerModel);
+                return RedirectToAction("UserLoginFailure", "Home");
             }
         }
         public ActionResult displayVenues()
@@ -48,7 +49,6 @@ namespace SeatView.Controllers
             if (Session["id"] != null)
             {
                 int idNum = (int)Session["id"];
-                List<VenueModel> venues = new List<VenueModel>();
 
                 // create a dual model to pass in name of owner and a list of their venues
                 OwnerVenueModel dualModel = new OwnerVenueModel();
@@ -60,7 +60,7 @@ namespace SeatView.Controllers
             else
             {
                 // redirect to the login page if the user has not been authenticated
-                return RedirectToAction("LoginView");
+                return RedirectToAction("UserLogin", "Home");
             }
         }
         public ActionResult InsertVenue()

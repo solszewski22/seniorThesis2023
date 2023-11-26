@@ -199,6 +199,7 @@
     <Content Include="Views\Home\LoginView.cshtml" />
     <Content Include="Views\Venue\SeatByClick.cshtml" />
     <Content Include="Views\Shared\SharedLoginView.cshtml" />
+    <Content Include="Views\Seat\SeatDetailsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
