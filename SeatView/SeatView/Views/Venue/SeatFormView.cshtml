@@ -5,7 +5,14 @@
 }
 
 <div class="venueBreadcrumbs">
-    @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue", new { @class = "btn btn-link venueBackLink" })
+    <a href="@Url.Action("displayLayoutInfo", "Venue")" class="backActionLink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+        </svg>
+        <span>
+            <strong>Back</strong>
+        </span>
+    </a>
 </div>
 
 <h2 class="addVenueHeader">Seat Form</h2>
@@ -35,7 +42,7 @@
         <input type="hidden" name="mediaID" value=@Model.mediaID />
 
         <div class="venueFormSaveBtnWrapper">
-            <button type="submit" class="btn btn-primary venueFormSaveBtn">Save</button>
+            <button type="submit" class="btn btn-success venueFormSaveBtn">Save</button>
         </div>
     }
 </div>

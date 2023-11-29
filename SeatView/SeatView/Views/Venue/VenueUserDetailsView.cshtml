@@ -4,7 +4,14 @@
 }
 
 <div class="venueBreadcrumbs">
-    @Html.ActionLink("Back to List", "UserIndex", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+    <a href="@Url.Action("UserIndex", "Venue")" class="backActionLink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+        </svg>
+        <span>
+            <strong>Back</strong>
+        </span>
+    </a>
 </div>
 
 <h2 class="text-center addVenueHeader">@Model.venueName</h2>
@@ -24,30 +31,6 @@
             @Html.ActionLink("Clear", "clearSeatSearch", "Venue", new { @class = "btn btn-warning" })
         </div>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <table class="table">
             <tr>
                 <th></th>
@@ -57,7 +40,12 @@
             {
                 <tr>
                     <td>
-                        Section @Html.DisplayFor(modelItem => item.section), Row @Html.DisplayFor(modelItem => item.row), Seat Number @Html.DisplayFor(modelItem => item.seatNum)
+                        <div class="userSeatDisplay">
+                            Section @Html.DisplayFor(modelItem => item.section), Row @Html.DisplayFor(modelItem => item.row), Seat Number @Html.DisplayFor(modelItem => item.seatNum)
+                        </div>
+                        <div class="userMediaDisplay">
+                            Section @Html.DisplayFor(modelItem => item.section) <br /> Row @Html.DisplayFor(modelItem => item.row) <br /> Seat @Html.DisplayFor(modelItem => item.seatNum)
+                        </div>
                     </td>
                     <td>
                         @Html.ActionLink("Details", "UserSeatIndex", "Seat", new { id = item.id }, new { @class = "btn btn-link venueDetailsLink" })

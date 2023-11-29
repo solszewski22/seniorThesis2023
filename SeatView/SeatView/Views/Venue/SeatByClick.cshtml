@@ -5,7 +5,14 @@
 }
 
 <div class="venueBreadcrumbs">
-    @Html.ActionLink("Back to List", "displayVenueDetails", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
+    <a href="@Url.Action("displayVenueDetails", "Venue")" class="backActionLink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+        </svg>
+        <span>
+            <strong>Back</strong>
+        </span>
+    </a>
 </div>
 
 <h2 class="text-center addVenueHeader">@Html.DisplayFor(model => model.venue.name)</h2>
@@ -18,10 +25,22 @@
     <input type="hidden" value="" id="x_coord" name="x_coord" />
     <input type="hidden" value="" id="y_coord" name="y_coord" />
     <input type="hidden" value=@Model.venue.id name="id" />
-    <div class="text-center seatByClickBtnGroup">
-        <button type="button" class="btn btn-info seatByClickBtn" id="chooseSeatBtn">Choose Seat</button>
-        <button type="button" class="btn btn-warning seatByClickBtn" id="clearBtn">Clear</button>
-        <button type="submit" class="btn btn-success seatByClickBtn" id="goBtn">Go</button>
+
+    <div class="btnDefault">
+        <div class="text-center seatByClickBtnGroup">
+            <button type="button" class="btn btn-info seatByClickBtn" id="chooseSeatBtn">Choose Seat</button>
+            <button type="button" class="btn btn-warning seatByClickBtn" id="clearBtn">Clear</button>
+            <button type="submit" class="btn btn-success seatByClickBtn" id="goBtn">Go</button>
+        </div>
+    </div>
+    <div class="mediaBtnSize">
+        <div class="text-center seatByClickBtnGroup">
+            <button type="button" class="btn btn-info seatByClickBtn" id="chooseSeatBtn">Choose Seat</button>
+            <div>
+                <button type="button" class="btn btn-warning seatByClickBtn" id="clearBtn">Clear</button>
+                <button type="submit" class="btn btn-success seatByClickBtn" id="goBtn">Go</button>
+            </div>
+        </div>
     </div>
 }
 
@@ -36,7 +55,7 @@
 <div class="row justify-content-evenly">
     @foreach (var item in Model.seatMedias)
     {
-       <div class="col-4 text-center">
+        <div class="col-4 text-center">
             <img src="@Url.Content(item.media.mediaURL)" width="250" height="250" alt="seatImg" />
             <p class="seatText text-dark">
                 Section @Html.DisplayFor(modelItem => item.seat.section), Row @Html.DisplayFor(modelItem => item.seat.row), Seat Number @Html.DisplayFor(modelItem => item.seat.seatNum)

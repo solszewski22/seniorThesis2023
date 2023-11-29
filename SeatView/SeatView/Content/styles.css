@@ -6,7 +6,13 @@
 .centerContent {
     display: flex; 
     text-align: center; 
-    justify-content: center;
+    justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 780px){
+    .centerContent {
+        flex-wrap: wrap;
+    }
 }
 
 .homePageCards {
@@ -15,7 +21,6 @@
 
 .homePageCard-getStarted {
    max-width: 20rem; 
-   margin-right: 50px; 
    padding: 40px 40px 40px 40px;
 }
 
@@ -78,9 +83,32 @@
     text-indent: 20px;
 }
 
+@media only screen and (max-width: 430px){
+    .venueListings {
+        font-size: small;
+    }
+
+    @media only screen and (max-width: 380px){
+        .venueListings{
+            display: none;
+        }
+    }
+}
+
 .venueActionLinks {
     text-align: center; 
     vertical-align: middle;
+}
+
+.backActionLink {
+    text-decoration: none;
+    color: #F39C12;
+}
+
+.editActionLink {
+    text-decoration: none;
+    color: #18BC9C;
+    float:right;
 }
 
 .venueEditLink {
@@ -187,8 +215,29 @@
     margin-right: auto;
 }
 
+.mediaBtnSize {
+    display: none;
+}
+
 .seatByClickBtnGroup {
     padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 300px) {
+    .mediaBtnSize{
+        display: block;
+    }
+    .btnDefault {
+        display: none;
+    }
+    #chooseSeatBtn {
+        margin-bottom: 10px;
+    }
+    .seatByClickBtnGroup{
+        display: block;
+    }
 }
 
 .seatByClickBtn {
@@ -208,3 +257,22 @@
 .seatText {
     padding-top: 10px;
 }
+
+.seatTitle {
+    padding-top: 20px;
+}
+
+.userMediaDisplay{
+    display: none;
+}
+
+@media only screen and (max-width: 450px){
+    .userMediaDisplay {
+        display: block;
+    }
+
+    .userSeatDisplay {
+        display: none;
+    }
+}
+

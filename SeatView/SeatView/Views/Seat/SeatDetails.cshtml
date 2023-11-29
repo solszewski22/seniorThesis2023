@@ -7,30 +7,38 @@
 <div class="venueBreadcrumbs">
     @if (!Model.userAccessed)
     {
-        @Html.ActionLink("Back to List", "displayLayoutInfo", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
-        @: /
-        @Html.ActionLink("Edit Seat", "UpdateSeat", "Venue", new { id = Model.seat.id }, new { @class = "btn btn-link venueEditLayoutLink" })
+        <a href="@Url.Action("displayLayoutInfo", "Venue")" class="backActionLink">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+            </svg>
+            <span>
+                <strong>Back</strong>
+            </span>
+        </a>
+
+        <a href="@Url.Action("UpdateSeat", "Venue", new { id = Model.seat.id })" class="editActionLink">
+            <span>
+                <strong>Edit</strong>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+            </svg>
+        </a>
     }
     else
     {
-        @Html.ActionLink("Back to List", "displayVenueDetails", "Venue", new { }, new { @class = "btn btn-link venueBackLink" })
-
+        <a href="@Url.Action("displayVenueDetails", "Venue")" class="backActionLink">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+            </svg>
+            <span>
+                <strong>Back</strong>
+            </span>
+        </a>
     }
 </div>
 
-<h2 class="text-center addVenueHeader">Seat View</h2>
+<h4 class="seatTitle">Section @Html.DisplayFor(model => model.seat.section), Row @Html.DisplayFor(model => model.seat.row), Seat @Html.DisplayFor(model => model.seat.seatNum)</h4>
+<hr />
+<img src="@Url.Content(Model.media.mediaURL)" class="venueLayoutImg" width="300" height="300" alt="seatImg" />
 
-<div>
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <img src="@Url.Content(Model.media.mediaURL)" width="250" height="250" alt="seatImg" />
-        </div>
-        <div class="col-4">
-            <p>
-                Section @Html.DisplayFor(model => model.seat.section) <br /><br />
-                Row @Html.DisplayFor(model => model.seat.row) <br /><br />
-                Seat Number @Html.DisplayFor(model => model.seat.seatNum)
-            </p>
-        </div>
-    </div>
-</div>
