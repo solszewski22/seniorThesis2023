@@ -59,6 +59,12 @@
     align-items: center;
 }
 
+.formCenterContent {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .newFormCenterContent {
     width: 80%;
     margin-left: auto;
@@ -85,18 +91,18 @@
     }
 }
 
+@media only screen and (max-width: 1000px){
+    .formCenterContent {
+        width: 80%;
+    }
+}
+
 @media only screen and (min-width: 900px) {
     .loginFormCenterContent {
         width: 40rem;
     }
 
     .newFormCenterContent {
-        width: 40rem;
-    }
-}
-
-@media only screen and (min-width: 900px) {
-    .loginFormCenterContent {
         width: 40rem;
     }
 }
@@ -241,14 +247,19 @@
         margin-right: auto;
     }
 
-    .seatFormFields {
-        width: 30em;
-    }
+.insertSeatImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .insertSeatImg {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+.insertSeatImg img {
+    height: auto;
+    width: 400px;
+}
+
+    .mediaFormatAddSeat {
+        display: none;
     }
 
     .searchField {
@@ -395,5 +406,22 @@
     .col-md-6 {
         flex: 0 0 auto;
         width: 70%;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .mediaFormatAddSeat{
+        display: block;
+    }
+
+    .formatAddSeat{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .insertSeatImg img {
+        width: 100%;
+        height: auto;
     }
 }

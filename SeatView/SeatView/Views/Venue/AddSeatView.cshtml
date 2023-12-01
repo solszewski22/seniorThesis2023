@@ -18,10 +18,10 @@
 
 <h2 class="addVenueHeader">Add a Seat</h2>
 
-<div>
+<div class="formatAddSeat">
     <div class="row justify-content-evenly">
         <div class="col-4 insertSeatImg">
-            <img src="@Url.Content(Model.venueUrl)" width="250" height="250" alt="layout" id="layout"/>
+            <img src="@Url.Content(Model.venueUrl)" alt="layout" id="layout"/>
         </div>
         <div class="col-4">
             @using (Html.BeginForm("processSeatInsert", "Venue", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -40,15 +40,15 @@
 
                 <div class="form-group">
                     <label class="form-label mt-4">Section</label>
-                    @Html.EditorFor(model => model.section, new { htmlAttributes = new { @class = "form-control seatFormFields", placeholder = "Section", id = "sectionField" } })
+                    @Html.EditorFor(model => model.section, new { htmlAttributes = new { @class = "form-control", placeholder = "Section", id = "sectionField" } })
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-4">Row</label>
-                    @Html.EditorFor(model => model.row, new { htmlAttributes = new { @class = "form-control seatFormFields", placeholder = "Row", id = "rowField" } })
+                    @Html.EditorFor(model => model.row, new { htmlAttributes = new { @class = "form-control", placeholder = "Row", id = "rowField" } })
                 </div>
                 <div class="form-group">
                     <label class="form-label mt-4">Name</label>
-                    @Html.EditorFor(model => model.seatNum, new { htmlAttributes = new { @class = "form-control seatFormFields", placeholder = "Seat Number", id = "seatNumField" } })
+                    @Html.EditorFor(model => model.seatNum, new { htmlAttributes = new { @class = "form-control", placeholder = "Seat Number", id = "seatNumField" } })
                 </div>
 
                 <div class="form-group">
@@ -67,6 +67,58 @@
         </div>
     </div>
 </div>
+
+<div class="mediaFormatAddSeat">
+    <div class="insertSeatImg">
+        <img src="@Url.Content(Model.venueUrl)" width="250" height="250" alt="layout" id="layout" />
+    </div>
+    <div>
+        @using (Html.BeginForm("processSeatInsert", "Venue", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label class="form-label mt-4">Please select a seat from the venue layout.</label>
+            <div class="seatByClickBtnGroup">
+                <button type="button" class="btn btn-info seatByClickBtn" id="chooseSeatBtn">Choose Seat</button>
+                <button type="button" class="btn btn-warning seatByClickBtn" id="clearBtn">Clear</button>
+            </div>
+
+            <div class="seatAlert">
+                <div class="alert alert-success text-center hidden" id="seatAlert" style="padding: 5px 20px 5px 20px;width: 450px">
+                    <strong>Seat Selected!</strong>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label mt-4">Section</label>
+                @Html.EditorFor(model => model.section, new { htmlAttributes = new { @class = "form-control", placeholder = "Section", id = "sectionField" } })
+            </div>
+            <div class="form-group">
+                <label class="form-label mt-4">Row</label>
+                @Html.EditorFor(model => model.row, new { htmlAttributes = new { @class = "form-control", placeholder = "Row", id = "rowField" } })
+            </div>
+            <div class="form-group">
+                <label class="form-label mt-4">Name</label>
+                @Html.EditorFor(model => model.seatNum, new { htmlAttributes = new { @class = "form-control", placeholder = "Seat Number", id = "seatNumField" } })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label mt-4">Upload Image</label><br />
+                <input type="file" name="imageFileName" requried="required" id="imgInput">
+            </div>
+
+            // hidden inputs for the x and y coordinates for access to attribute in the seat model
+            @Html.HiddenFor(model => model.x_coord, new { id = "x_coord", Value = "" });
+            @Html.HiddenFor(model => model.y_coord, new { id = "y_coord", Value = "" });
+
+            <div class="venueFormSaveBtnWrapper">
+                <button type="submit" class="btn btn-success venueFormSaveBtn" id="saveBtn">Save</button>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+
 
 <script>
     let isInClickMode = false;
