@@ -1,18 +1,24 @@
-﻿.homePageTitle {
-    text-align:center; 
+﻿.navImg{
+    height: 40px;
+    width: auto;
+}
+
+.homePageTitle {
     padding: 50px 0px 50px 0px;
+    width: auto;
+    height: 280px;
+}
+
+.seatViewMainLogo {
+    padding: 20px 0px 20px 0px;
+    width: auto;
+    height: 140px;
 }
 
 .centerContent {
     display: flex; 
     text-align: center; 
-    justify-content: space-evenly;
-}
-
-@media only screen and (max-width: 780px){
-    .centerContent {
-        flex-wrap: wrap;
-    }
+    justify-content: center;
 }
 
 .homePageCards {
@@ -20,16 +26,22 @@
 }
 
 .homePageCard-getStarted {
-   max-width: 20rem; 
-   padding: 40px 40px 40px 40px;
+    max-width: 20rem;
+    padding: 40px 80px 40px 40px;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: 2px solid #18BC9C;
+    border-radius: 0px;
 }
 
 .homePageCard-findSeat {
     max-width: 20rem; 
-    padding: 40px 40px 40px 40px;
+    padding: 40px 40px 40px 80px;
+    border: none;
 }
 
-.loginPage {
+/*.loginPage {
     margin: 0; 
     position: absolute; 
     top: 50%; 
@@ -39,7 +51,7 @@
 
 .loginCard {
    width: 35rem;
-}
+}*/
 
 .pageCenterContent {
     display: flex; 
@@ -47,9 +59,52 @@
     align-items: center;
 }
 
-.loginInputField {
-    width: 30em;
+.newFormCenterContent {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
+
+.loginFormCenterContent {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 700px){
+    .loginFormCenterContent {
+        width: 100%;
+    }
+
+    .newFormCenterContent {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .loginFormCenterContent {
+        width: 40rem;
+    }
+
+    .newFormCenterContent {
+        width: 40rem;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .loginFormCenterContent {
+        width: 40rem;
+    }
+}
+
+/*.loginInputField {
+    width: 30em;
+    max-width: 80%;
+}*/
 
 .loginBtn {
     margin-top: 20px; 
@@ -58,15 +113,8 @@
 }
 
 .newAccountForm {
-    margin: 150px 0px 50px 0px; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-}
-
-.newAccountCard {
-    width: 35rem;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .signUpBtn {
@@ -79,20 +127,12 @@
     padding: 30px 0px 30px 0px;
 }
 
-.venueListings {
+.ownerVenueListings {
     text-indent: 20px;
 }
 
-@media only screen and (max-width: 430px){
-    .venueListings {
-        font-size: small;
-    }
-
-    @media only screen and (max-width: 380px){
-        .venueListings{
-            display: none;
-        }
-    }
+.venueListings {
+    text-indent: 20px;
 }
 
 .venueActionLinks {
@@ -100,179 +140,260 @@
     vertical-align: middle;
 }
 
-.backActionLink {
-    text-decoration: none;
-    color: #F39C12;
-}
 
-.editActionLink {
-    text-decoration: none;
-    color: #18BC9C;
-    float:right;
-}
+    .backActionLink {
+        text-decoration: none;
+        color: #F39C12;
+    }
 
-.venueEditLink {
-    text-decoration: none; 
-    color: #F39C12;
-}
+    .editActionLink {
+        text-decoration: none;
+        color: #18BC9C;
+        float: right;
+    }
 
-.venueEditLink:hover {
-    text-decoration: underline;
-    color: #F39C12;
-}
+    .venueEditLink {
+        text-decoration: none;
+        color: #F39C12;
+    }
 
-.venueDetailsLink {
-    text-decoration: none;
-}
+        .venueEditLink:hover {
+            text-decoration: underline;
+            color: #F39C12;
+        }
 
-.venueDetailsLink:hover {
-    text-decoration: underline;
-    color: #18BC9C;
-}
+    .venueDetailsLink {
+        text-decoration: none;
+    }
 
-.venueDeleteLink {
-    text-decoration: none;
-    color: #E74C3C;
-}
-.venueDeleteLink:hover {
-    text-decoration: underline;
-    color: #E74C3C;
-}
+        .venueDetailsLink:hover {
+            text-decoration: underline;
+            color: #18BC9C;
+        }
 
-.venueBreadcrumbs {
-    padding: 10px 0px 10px 0px;
-}
+    .venueDeleteLink {
+        text-decoration: none;
+        color: #E74C3C;
+    }
 
-.venueBackLink {
-    text-decoration: none;
-    color: #F39C12;
-}
+        .venueDeleteLink:hover {
+            text-decoration: underline;
+            color: #E74C3C;
+        }
 
-.venueBackLink:hover {
-    text-decoration: underline;
-    color: #F39C12
-}
+    .venueBreadcrumbs {
+        padding: 10px 0px 10px 0px;
+    }
 
-.venueEditLayoutLink {
-    text-decoration: none;
-    padding-left: 5px;
-}
+    .venueBackLink {
+        text-decoration: none;
+        color: #F39C12;
+    }
 
-.venueEditLayoutLink:hover {
-    text-decoration: underline;
-    color: #18BC9C;
-}
+        .venueBackLink:hover {
+            text-decoration: underline;
+            color: #F39C12
+        }
 
-.addVenueHeader {
-    text-align:center; 
-    padding: 20px 0px 20px 0px;
-}
+    .venueEditLayoutLink {
+        text-decoration: none;
+        padding-left: 5px;
+    }
 
-.venueFormFields {
-    width: 50em;
-}
+        .venueEditLayoutLink:hover {
+            text-decoration: underline;
+            color: #18BC9C;
+        }
 
-.venueFormSaveBtnWrapper {
-    text-align: center;
-    padding-bottom: 20px;
-}
+    .addVenueHeader {
+        text-align: center;
+        padding: 20px 0px 20px 0px;
+    }
 
-.venueFormSaveBtn {
-    margin-top: 20px; 
-    padding: 5px 50px 5px 50px; 
-    border-radius: 20px;
-}
+    .venueFormFields {
+        width: 50em;
+    }
 
-.venueLayoutImg {
-    display: block; 
-    margin-left: auto; 
-    margin-right: auto;
-}
+    .venueFormSaveBtnWrapper {
+        text-align: center;
+        padding-bottom: 20px;
+    }
 
-.seatTable {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-}
+    .venueFormSaveBtn {
+        margin-top: 20px;
+        padding: 5px 50px 5px 50px;
+        border-radius: 20px;
+    }
 
-.seatFormFields {
-    width: 30em;
-}
+    .venueLayoutImg {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 250px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
 
-.insertSeatImg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .seatTable {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-.searchField {
-    width: 50rem;
-}
+    .seatFormFields {
+        width: 30em;
+    }
 
-.seatSearch {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
+    .insertSeatImg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.mediaBtnSize {
-    display: none;
-}
+    .searchField {
+        width: 50rem;
+    }
 
-.seatByClickBtnGroup {
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
+    .seatSearch {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mediaBtnSize {
+        display: none;
+    }
+
+    .seatByClickBtnGroup {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .seatByClickBtn {
+        margin-right: 10px;
+        border-radius: 20px;
+    }
+
+    .seatAlert {
+        margin-top: 20px;
+    }
+
+    .hidden {
+        visibility: hidden;
+        display: none;
+    }
+
+    .seatText {
+        padding-top: 10px;
+    }
+
+    .seatTitle {
+        padding-top: 20px;
+    }
+
+    .userMediaDisplay {
+        display: none;
+    }
+
+    @media only screen and (max-width: 450px) {
+        .userMediaDisplay {
+            display: block;
+        }
+
+        .userSeatDisplay {
+            display: none;
+        }
+    }
+
+@media only screen and (max-width: 770px) {
+    .ownerVenueListings {
+        display: none;
+    }
+
+    .venueEditLink, .venueDetailsLink, .venueDeleteLink {
+        font-size: smaller;
+        padding: 0px 2px 0px 2px;
+    }
 }
 
 @media only screen and (max-width: 300px) {
-    .mediaBtnSize{
+    .mediaBtnSize {
         display: block;
     }
+
     .btnDefault {
         display: none;
     }
+
     #chooseSeatBtn {
         margin-bottom: 10px;
     }
-    .seatByClickBtnGroup{
+
+    .seatByClickBtnGroup {
         display: block;
     }
 }
 
-.seatByClickBtn {
-    margin-right: 10px; 
-    border-radius: 20px;
-}
-
-.seatAlert {
-    margin-top: 20px;
-}
-
-.hidden{
-    visibility:hidden;
-    display: none;
-}
-
-.seatText {
-    padding-top: 10px;
-}
-
-.seatTitle {
-    padding-top: 20px;
-}
-
-.userMediaDisplay{
-    display: none;
-}
-
-@media only screen and (max-width: 450px){
-    .userMediaDisplay {
-        display: block;
+@media only screen and (max-width: 430px) {
+    .venueListings {
+        font-size: small;
     }
 
-    .userSeatDisplay {
-        display: none;
+    @media only screen and (max-width: 380px) {
+        .venueListings {
+            display: none;
+        }
     }
 }
 
+
+@media only screen and (max-width: 780px) {
+    .homePageTitle {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .seatViewMainLogo {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .centerContent {
+        flex-wrap: wrap;
+    }
+
+    .homePageCard-getStarted {
+        padding: 40px 40px 40px 40px;
+        border: 1px solid #18BC9C;
+        border-radius: 3px;
+    }
+
+    .homePageCard-findSeat {
+        padding: 40px 40px 40px 40px;
+        border: 1px solid #18BC9C;
+        border-radius: 3px;
+    }
+}
+
+@media only screen and (max-width: 815px){
+    .formSize {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .offset-md-3 {
+        margin-left: 15%;
+    }
+
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 70%;
+    }
+}

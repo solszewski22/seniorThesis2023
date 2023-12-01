@@ -3,7 +3,7 @@
     ViewBag.Title = "SharedLoginView";
 }
 
-<div class="loginPage">
+<div class="loginFormCenterContent">
     <div class="card border-success mb-3 loginCard">
         <div class="card-body">
             <h2 class="card-title text-center">Login</h2>
@@ -13,16 +13,16 @@
                 <p class="text-danger text-center" id="invalidAlert">Incorrect Username or Password. Please try again.</p>
             }
 
-            <div class="pageCenterContent">
+            <div>
                 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
                 {
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="form-label mt-4">Username</label>
-                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Enter Username", style = "width: 30em" } })
+                        <label class="form-label mt-4">Username</label>
+                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Enter Username"} })
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
-                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", required = "required", placeholder = "Enter Password", autocomplete = "off", style = "width: 30em" } })
+                        <label class="form-label mt-4">Password</label>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", required = "required", placeholder = "Enter Password", autocomplete = "off"} })
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary loginBtn">Login</button>
