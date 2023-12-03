@@ -41,18 +41,6 @@
     border: none;
 }
 
-/*.loginPage {
-    margin: 0; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-}
-
-.loginCard {
-   width: 35rem;
-}*/
-
 .pageCenterContent {
     display: flex; 
     justify-content: center; 
@@ -80,37 +68,6 @@
     margin-top: 40px;
     margin-bottom: 40px;
 }
-
-@media only screen and (max-width: 700px){
-    .loginFormCenterContent {
-        width: 100%;
-    }
-
-    .newFormCenterContent {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 1000px){
-    .formCenterContent {
-        width: 80%;
-    }
-}
-
-@media only screen and (min-width: 900px) {
-    .loginFormCenterContent {
-        width: 40rem;
-    }
-
-    .newFormCenterContent {
-        width: 40rem;
-    }
-}
-
-/*.loginInputField {
-    width: 30em;
-    max-width: 80%;
-}*/
 
 .loginBtn {
     margin-top: 20px; 
@@ -147,105 +104,111 @@
 }
 
 
-    .backActionLink {
-        text-decoration: none;
+.backActionLink {
+    text-decoration: none;
+    color: #F39C12;
+}
+
+.editActionLink {
+    text-decoration: none;
+    color: #18BC9C;
+    float: right;
+}
+
+.venueEditLink {
+    text-decoration: none;
+    color: #F39C12;
+}
+
+    .venueEditLink:hover {
+        text-decoration: underline;
         color: #F39C12;
     }
 
-    .editActionLink {
-        text-decoration: none;
+.venueDetailsLink {
+    text-decoration: none;
+}
+
+    .venueDetailsLink:hover {
+        text-decoration: underline;
         color: #18BC9C;
-        float: right;
     }
 
-    .venueEditLink {
-        text-decoration: none;
-        color: #F39C12;
-    }
+.venueDeleteLink {
+    text-decoration: none;
+    color: #E74C3C;
+}
 
-        .venueEditLink:hover {
-            text-decoration: underline;
-            color: #F39C12;
-        }
-
-    .venueDetailsLink {
-        text-decoration: none;
-    }
-
-        .venueDetailsLink:hover {
-            text-decoration: underline;
-            color: #18BC9C;
-        }
-
-    .venueDeleteLink {
-        text-decoration: none;
+    .venueDeleteLink:hover {
+        text-decoration: underline;
         color: #E74C3C;
     }
 
-        .venueDeleteLink:hover {
-            text-decoration: underline;
-            color: #E74C3C;
-        }
+.venueBreadcrumbs {
+    padding: 10px 0px 10px 0px;
+}
 
-    .venueBreadcrumbs {
-        padding: 10px 0px 10px 0px;
+.venueBackLink {
+    text-decoration: none;
+    color: #F39C12;
+}
+
+    .venueBackLink:hover {
+        text-decoration: underline;
+        color: #F39C12
     }
 
-    .venueBackLink {
-        text-decoration: none;
-        color: #F39C12;
+.venueEditLayoutLink {
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+    .venueEditLayoutLink:hover {
+        text-decoration: underline;
+        color: #18BC9C;
     }
 
-        .venueBackLink:hover {
-            text-decoration: underline;
-            color: #F39C12
-        }
+.addVenueHeader {
+    text-align: center;
+    padding: 20px 0px 20px 0px;
+}
 
-    .venueEditLayoutLink {
-        text-decoration: none;
-        padding-left: 5px;
-    }
+.venueFormFields {
+    width: 50em;
+}
 
-        .venueEditLayoutLink:hover {
-            text-decoration: underline;
-            color: #18BC9C;
-        }
+.venueFormSaveBtnWrapper {
+    text-align: center;
+    padding-bottom: 20px;
+}
 
-    .addVenueHeader {
-        text-align: center;
-        padding: 20px 0px 20px 0px;
-    }
+.venueFormSaveBtn {
+    margin-top: 20px;
+    padding: 5px 50px 5px 50px;
+    border-radius: 20px;
+}
 
-    .venueFormFields {
-        width: 50em;
-    }
+.venueLayoutImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 500px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 40px;
+}
 
-    .venueFormSaveBtnWrapper {
-        text-align: center;
-        padding-bottom: 20px;
-    }
+.seatImg{
+    height: 250px;
+    width: auto;
+}
 
-    .venueFormSaveBtn {
-        margin-top: 20px;
-        padding: 5px 50px 5px 50px;
-        border-radius: 20px;
-    }
-
-    .venueLayoutImg {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        height: 250px;
-        width: auto;
-        max-width: 100%;
-        object-fit: contain;
-    }
-
-    .seatTable {
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+.seatTable {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .insertSeatImg {
     display: flex;
@@ -254,69 +217,95 @@
 }
 
 .insertSeatImg img {
-    height: auto;
-    width: 400px;
+    height: 500px;
+    width: auto;
 }
 
-    .mediaFormatAddSeat {
-        display: none;
+.mediaFormatAddSeat {
+    display: none;
+}
+
+.searchField {
+    width: 50rem;
+}
+
+.seatSearch {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mediaBtnSize {
+    display: none;
+}
+
+.seatByClickBtnGroup {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.seatByClickBtn {
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+.seatAlert {
+    margin-top: 20px;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.seatText {
+    padding-top: 10px;
+}
+
+.seatTitle {
+    padding-top: 20px;
+}
+
+.userMediaDisplay {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .loginFormCenterContent {
+        width: 100%;
     }
 
-    .searchField {
-        width: 50rem;
+    .newFormCenterContent {
+        width: 100%;
     }
+}
 
-    .seatSearch {
+@media only screen and (max-width: 1000px) {
+    .formCenterContent {
         width: 80%;
-        margin-left: auto;
-        margin-right: auto;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .loginFormCenterContent {
+        width: 40rem;
     }
 
-    .mediaBtnSize {
-        display: none;
+    .newFormCenterContent {
+        width: 40rem;
     }
+}
 
-    .seatByClickBtnGroup {
-        padding-top: 20px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .seatByClickBtn {
-        margin-right: 10px;
-        border-radius: 20px;
-    }
-
-    .seatAlert {
-        margin-top: 20px;
-    }
-
-    .hidden {
-        visibility: hidden;
-        display: none;
-    }
-
-    .seatText {
-        padding-top: 10px;
-    }
-
-    .seatTitle {
-        padding-top: 20px;
-    }
-
+@media only screen and (max-width: 450px) {
     .userMediaDisplay {
+        display: block;
+    }
+
+    .userSeatDisplay {
         display: none;
     }
-
-    @media only screen and (max-width: 450px) {
-        .userMediaDisplay {
-            display: block;
-        }
-
-        .userSeatDisplay {
-            display: none;
-        }
-    }
+}
 
 @media only screen and (max-width: 770px) {
     .ownerVenueListings {

@@ -1,4 +1,5 @@
 ﻿@model SeatView.Models.VenueModel
+@using SeatView.Models
 
 @{
     ViewBag.Title = "VenueFormView";
@@ -50,7 +51,10 @@
         </div>
         <div class="form-group">
             <label class="form-label mt-4">State</label>
-            @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control", required = "required", placeholder = "Choose State" } })
+            @Html.DropDownList("state",
+                                new SelectList(Enum.GetValues(typeof(State))),
+                                "Choose State",
+                                new { @class = "form-select" })
         </div>
         <div class="form-group">
             <label class="form-label mt-4">Zip Code</label>
@@ -58,8 +62,8 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label mt-4">Upload Image</label><br/>
-            <input type="file" name="imageFileName" requried="required">
+            <label class="form-label mt-4">Upload Image</label><br />
+            <input type="file" name="imageFileName" requried />
         </div>
 
         <input type="hidden" name="layoutURL" value="@Model.layoutURL" />
