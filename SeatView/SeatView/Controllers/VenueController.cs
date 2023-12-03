@@ -230,6 +230,8 @@ namespace SeatView.Controllers
             // search for specific seat based on passed in string
             VenueSeatModel dualModel = new VenueSeatModel();
 
+            int id = (int)Session["userVenueID"];
+
             VenueModel venue = service.retrieveOneVenue((int)Session["userVenueID"]);
             dualModel.venueLayout = venue.layoutURL;
 
@@ -239,9 +241,29 @@ namespace SeatView.Controllers
 
             return View("VenueUserDetailsView", dualModel);
         }
+
+        public ActionResult ownerSearchSeat(string searchString)
+        {
+            // search for specific seat based on passed in string
+            VenueSeatModel dualModel = new VenueSeatModel();
+
+            VenueModel venue = service.retrieveOneVenue((int)Session["venueID"]);
+            dualModel.venueLayout = venue.layoutURL;
+
+            List<SeatModel> seats = service.retrieveSearchSeats(searchString);
+            dualModel.seats = seats;
+            dualModel.venueName = venue.name;
+
+            return View("LayoutInfoView", dualModel);
+        }
         public ActionResult clearSeatSearch()
         {
             return displayVenueDetails();
+        }
+
+        public ActionResult ownerClearSeatSearch()
+        {
+            return displayLayoutInfo();
         }
         public ActionResult clearVenueSearch()
         {
